@@ -1,5 +1,6 @@
-package com.brs.library;
+package com.brs.library.controller;
 
+import com.brs.library.entity.Role;
 import com.brs.library.entity.User;
 import com.brs.library.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -19,42 +20,31 @@ public class PageController {
     @Autowired
     private UserRepository userRepos;
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
-                           Map<String, Object> model
-    ) {
-        model.put("name", name);
+    @GetMapping("/")
+    public String greeting(Map<String, Object> model) {
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Map<String, Object> model){
         Iterable<User> users = userRepos.findAll();
         model.put("users", users);
         return "main";
     }
-    @PostMapping
-    public String add(@RequestParam String username, @RequestParam String role, Map<String, Object> model){
-        User user = User.builder()
-                .username(username)
-                .role(role)
-                .build();
+   /* @PostMapping("/main")
+    public String add(@RequestParam String username, @RequestParam Role role, Map<String, Object> model){
+        User user = new User(username, role);
         userRepos.save(user);
         Iterable<User> users = userRepos.findAll();
         model.put("users", users);
         return "main";
-    }
+    }*/
 
     @PostMapping("/filter")
     public String filter(@RequestParam String filter, Map<String, Object> model){
         Iterable<User> users;
 
-        log.info(filter);
-        if(filter != null && !filter.isEmpty()){
-            users = userRepos.findByRole(filter);
-        } else {
             users = userRepos.findAll();
-        }
 
         model.put("users", users);
         return "main";
