@@ -7,9 +7,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    //TODO add services
-    @Override
     List<User> findAll();
-
     User findByUsername(String username);
 }
