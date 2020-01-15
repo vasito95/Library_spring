@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Spring Security Example </title>
+
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+
+
+</head>
+<body ng-app="login_page" ng-controller="LoginCtrl">
+
+
+<form style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email"
+               class="form-control"
+               id="exampleInputEmail1"
+               placeholder="Email"
+               required
+               ng-model="auth.email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password"
+               class="form-control"
+               id="exampleInputPassword1"
+               placeholder="Password"
+               required
+               ng-model="auth.password">
+    </div>
+    <button type="submit" class="btn btn-default" style="margin-top:30px" ng-disabled="form.$invalid">
+        Submit
+    </button>
+</form>
+
+<a href="/registration">Registration</a>
+<script type="text/javascript" src="/js/login.js"></script>
+</body>
+</html>

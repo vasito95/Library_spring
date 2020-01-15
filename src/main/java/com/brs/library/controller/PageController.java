@@ -5,6 +5,7 @@ import com.brs.library.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
@@ -17,8 +18,8 @@ public class PageController {
     private UserRepository userRepos;
 
     @GetMapping("/")
-    public String greeting(Map<String, Object> model) {
-        return "greeting";
+    public String greeting(Model model) {
+        return "index.html";
     }
 
     @GetMapping("/main")
@@ -26,5 +27,9 @@ public class PageController {
         Iterable<User> users = userRepos.findAll();
         model.put("users", users);
         return "main";
+    }
+    @GetMapping("/login")
+    public String getLogin(Model model){
+        return "login.html";
     }
 }

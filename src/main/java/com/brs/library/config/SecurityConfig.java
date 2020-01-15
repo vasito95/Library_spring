@@ -4,6 +4,7 @@ import com.brs.library.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,12 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/","/registration").permitAll()
+                    .antMatchers("/","/registration", "/js/**").permitAll()
+                    /*.antMatchers(HttpMethod.GET, "/css/**", "/js/**").permitAll()*/
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
-                    .permitAll()
+                    .permitAll().successForwardUrl("/main")
                 .and()
                     .logout()
                     .permitAll();
