@@ -7,27 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-    <body>
-        <form action="/logout" method="post">
-            <input type="submit"jj value="Sign Out"/>
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-        </form>
-    <div>
-        <form method="post" action="/filter">
-            <input type="text" name="filter" placeholder="Filter">
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-            <button type="submit">Filter</button>
-        </form>
-    </div>
-    <div>
-        <form method="post">
-            <input type="text" name="username" placeholder="Input Username">
-            <input type="text" name="role" placeholder="Input Role">
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-            <button type="submit">Add</button>
-        </form>
-    </div>
-    <div>User list</div>
-
-    </body>
+<body>
+<form action="/logout" method="post">
+    <input type="submit" jj value="Sign Out"/>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+</form>
+<div>
+    <form method="post" action="/filter">
+        <input type="text" name="filter" placeholder="Filter">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+<div>
+    <form method="post" action="/newbook">
+        <input type="text" name="name" placeholder="Input Book Name">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <button type="submit">Add</button>
+    </form>
+</div>
+<div>Book list</div>
+{{#books}}
+    <span>{{name}}</span>
+    <span>{{isInUse}}</span>
+{{/books}}
+</body>
 </html>
