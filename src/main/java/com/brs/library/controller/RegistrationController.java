@@ -2,7 +2,6 @@ package com.brs.library.controller;
 
 import com.brs.library.entity.Role;
 import com.brs.library.entity.User;
-import com.brs.library.repository.UserRepository;
 import com.brs.library.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

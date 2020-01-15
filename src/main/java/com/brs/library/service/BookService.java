@@ -30,4 +30,15 @@ public class BookService {
     public void deleteById(Long id){
         this.bookRepository.deleteById(id);
     }
+
+    public List<Book> findAllWhereNameLikeAndIsInUseEquals(String name, Boolean isInUse){
+        String pattern = "%" + name + "%";
+        if(name == null) {
+            return this.bookRepository.findAll();
+        }
+        return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, isInUse)
+                :this.bookRepository.findAllWhereNameLike(pattern);
+    }
+
+
 }
