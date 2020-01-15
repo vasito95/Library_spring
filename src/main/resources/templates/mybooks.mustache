@@ -14,28 +14,16 @@
     <a href="/freebooks">Free Books</a>
     <a href="/mybooks">My Books</a>
     <form action="/logout" method="post">
-        <input type="submit" value="Sign Out"/>
+        <input id="button" type="submit" value="Sign Out"/>
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
     </form>
 </header>
 
-<!--<div>
-    <form method="post" action="/filter">
-        <input type="text" name="filter" placeholder="Filter">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <button type="submit">Filter</button>
-    </form>
-</div>-->
-<!--<div>
-    <form method="post" action="/newbook">
-        <input type="text" name="name" placeholder="Input Book Name">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-        <button type="submit">Add</button>
-    </form>
-</div>-->
 <div>Book list</div>
-{{#name}}
-       <h1> Welcome {{name}}</h1>
-{{/name}}
+{{#books}}
+    <span>{{name}}</span>
+    <span>{{isInUse}}</span>
+    <br>
+{{/books}}
 </body>
 </html>

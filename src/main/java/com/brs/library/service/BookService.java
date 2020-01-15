@@ -15,29 +15,32 @@ public class BookService {
     private BookRepository bookRepository;
 
 
-    public Book findById(Long id){
+    public Book findById(Long id) {
         return this.bookRepository.findById(id).get();
     }
 
-    public void saveNewBook(Book b){
+    public void saveNewBook(Book b) {
         this.bookRepository.save(b);
     }
 
-    public List<Book> findAll(){
+    public List<Book> findAll() {
         return this.bookRepository.findAll();
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         this.bookRepository.deleteById(id);
     }
+    public List<Book> findAllByUserId(Long id){
+        return this.bookRepository.findAllByUserId(id);
+    }
 
-    public List<Book> findAllWhereNameLikeAndIsInUseEquals(String name, Boolean isInUse){
+    public List<Book> findAllWhereNameLikeAndIsInUseEquals(String name, Boolean isInUse) {
         String pattern = "%" + name + "%";
-        if(name == null) {
+        if (name == null) {
             return this.bookRepository.findAll();
         }
         return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, isInUse)
-                :this.bookRepository.findAllWhereNameLike(pattern);
+                : this.bookRepository.findAllWhereNameLike(pattern);
     }
 
 

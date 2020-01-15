@@ -8,10 +8,16 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/logout" method="post">
-    <input type="submit" value="Sign Out"/>
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-</form>
+<header>
+    <a href="/orderbook">Order another book</a>
+    <a href="/allbooks">All Books</a>
+    <a href="/freebooks">Free Books</a>
+    <a href="/mybooks">My Books</a>
+    <form action="/logout" method="post">
+        <input id="button" type="submit" value="Sign Out"/>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    </form>
+</header>
 <div>
     <form method="get" action="/allbooks">
         <input type="text" name="filter" placeholder="Filter">
