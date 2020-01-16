@@ -38,7 +38,7 @@ public class PageController {
         log.info(newBook.toString());
         this.bookService.saveNewBook(newBook);
 
-        return "redirect:/";
+        return "redirect:";
     }
 
 }

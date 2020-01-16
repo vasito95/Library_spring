@@ -24,7 +24,7 @@ public class AllBooksController {
     @GetMapping
     public String getFiltered(@RequestParam(value = "filter", required = false) String filter, @RequestParam(value = "isFree", required = false) Boolean isFree, Map<String, Object> model){
         log.info(filter);
-        log.info(new Boolean(Boolean.TRUE.equals(isFree)).toString());
+        log.info(Boolean.toString((Boolean.TRUE.equals(isFree))));
         List<Book> books = this.bookService.findAllWhereNameLikeAndIsInUseEquals(filter, Boolean.TRUE.equals(isFree));
         model.put("books", books);
         return "allbooks";
