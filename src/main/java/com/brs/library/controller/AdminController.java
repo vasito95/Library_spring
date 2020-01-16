@@ -33,7 +33,9 @@ public class AdminController {
     }
 
     @GetMapping("/add-book")
-    public String getAddBook(){
+    public String getAddBook( Map<String, Object> model){
+        Iterable<Book> books = this.bookService.findAll();
+        model.put("books", books);
         return "addbook";
     }
 
@@ -43,6 +45,12 @@ public class AdminController {
         model.put("orders", orders);
         return "orders";
     }
+    @GetMapping("/library")
+    public String getLibrary( Map<String, Object> model){
+        Iterable<Book> books = this.bookService.findAll();
+        model.put("books", books);
+        return "library";
+    }
 
     @PostMapping("/add-book")
     public String addNewWord(String name){
@@ -51,7 +59,7 @@ public class AdminController {
                 .name(name)
                 .build();
         this.bookService.saveNewBook(newBook);
-        return "redirect:";
+        return "redirect:/addbook";
     }
     @PostMapping("/edit-book")
     public String editBook(String name){

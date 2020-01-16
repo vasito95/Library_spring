@@ -55,10 +55,16 @@ public class BookService {
     public List<Book> findAllWhereNameLikeAndIsInUseEquals(String name, Boolean isInUse) {
         String pattern = "%" + name + "%";
         if (name == null) {
-            return this.bookRepository.findAll();
+           if(isInUse){
+               return this.bookRepository.findAllWhereNameLikeAndIsInUseEquals("", !isInUse);
+           } else {
+               return this.bookRepository.findAll();
+           }
+
         }
-        return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, isInUse)
+        return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, !isInUse)
                 : this.bookRepository.findAllWhereNameLike(pattern);
+
     }
 
 }

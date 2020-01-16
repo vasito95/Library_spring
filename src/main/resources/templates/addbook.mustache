@@ -38,10 +38,42 @@
     <div class="row">
         <div class="col text-center">
             <form action="/admin/add-book" method="post">
-                <input type="text" name="name" placeholder="Input book name">
+                <input class="form-control" type="text" name="name" placeholder="Input book name">
                 <input type="submit" value="Add"/>
                 <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Date to</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#books}}
+                    <tr>
+                        <th scope="row">{{id}}</th>
+                        <td>{{name}}</td>
+                        <td>
+                            {{#inUseBy}}
+                                inUseBy
+                            {{/inUseBy}}
+                        </td>
+                    </tr>
+                {{/books}}
+
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>

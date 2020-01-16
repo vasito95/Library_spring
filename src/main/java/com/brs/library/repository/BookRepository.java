@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +30,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByUserId(Long id);
 
     @Modifying
-    @Query(value = "UPDATE Book b set b.isInUse=?1 , b.userId=?2 where b.id=?3")
-    void updateBookUserIdAndIsInUse(Boolean isInUser, Long userId, Long bookId);
+    @Query(value = "UPDATE Book b set b.isInUse=?1 , b.userId=?2, b.inUseBy=?3 where b.id=?4")
+    void updateBookUserIdAndIsInUse(Boolean isInUser, Long userId, LocalDate dateBy, Long bookId);
 
     @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1 AND b.isInUse=?2")
     List<Book> findAllWhereNameLikeAndIsInUseEquals(String n, Boolean isFree);
