@@ -26,7 +26,9 @@ public class BookService {
     public List<Book> findAll() {
         return this.bookRepository.findAll();
     }
-
+    public Book findByName(String name){
+        return this.bookRepository.findBookByName(name);
+    }
     public void deleteById(Long id) {
         this.bookRepository.deleteById(id);
     }

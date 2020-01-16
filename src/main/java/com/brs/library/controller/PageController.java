@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Map;
+
 @Slf4j
 
 @Controller
@@ -22,16 +23,14 @@ public class PageController {
     private BookService bookService;
 
     @GetMapping
-    public String main(Map<String, Object> model){
-
-             // User name = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    public String main(Map<String, Object> model) {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
         model.put("name", name);
         return "index";
     }
+
     @PostMapping("/newbook")
-    public String addNewBook(String name, Map<String, Object> model){
+    public String addNewBook(String name, Map<String, Object> model) {
         Book newBook = Book.builder()
                 .isInUse(false)
                 .name(name)

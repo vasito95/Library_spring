@@ -19,6 +19,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Override
     void deleteById(Long aLong);
 
+    Book findBookByName(String name);
+
    // @Query(value = "SELECT * FROM books WHERE user_id=id", nativeQuery = true)
     List<Book> findAllByUserId(Long id);
 
@@ -28,7 +30,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1")
     List<Book> findAllWhereNameLike(String n);
-
-
-
 }

@@ -1,10 +1,7 @@
 package com.brs.library.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @ToString
+@Getter
 
 @Entity
 @Table(name = "books")
@@ -23,6 +21,5 @@ public class Book {
     private String name;
     private Long userId;
     private LocalDate inUseBy;
-    private LocalDate inUseFrom;
     private Boolean isInUse;
 }
