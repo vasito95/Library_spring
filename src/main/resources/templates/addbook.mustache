@@ -19,7 +19,7 @@
             <a class="border p-3 text-danger" href="/admin/orders">Confirm Orders</a>
         </div>
         <div class="col-sm text-center">
-            <a class="border p-3 text-danger" href="/admin/edit-book">Edit Book</a>
+            <a class="border p-3 text-danger" href="/admin/library">Library</a>
         </div>
 
         <div class="col-sm text-center">
@@ -37,7 +37,7 @@
 <div class="container">
     <div class="row">
         <div class="col text-center">
-            <form action="/add-book" method="post">
+            <form action="/admin/add-book" method="post">
                 <input type="text" name="name" placeholder="Input book name">
                 <input type="submit" value="Add"/>
                 <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>

@@ -25,22 +25,30 @@ public class BookService {
     }
 
     @Transactional
-    public void updateBook(Long id, Long userId){
-        this.bookRepository.updateBookUserIdAndIsInUse(true, userId, id);
+    public void updateBook(Long bookId, Long userId) {
+        this.bookRepository.save(updateUserId(bookId, userId));
+        //this.bookRepository.updateBookUserIdAndIsInUse(false, userId, bookId);
     }
 
-
+    private Book updateUserId(Long bookId, Long userId) {
+        Book book = this.bookRepository.getOne(bookId);
+        book.setUserId(userId);
+        return book;
+    }
 
     public List<Book> findAll() {
         return this.bookRepository.findAll();
     }
-    public Book findByName(String name){
+
+    public Book findByName(String name) {
         return this.bookRepository.findBookByName(name);
     }
+
     public void deleteById(Long id) {
         this.bookRepository.deleteById(id);
     }
-    public List<Book> findAllByUserId(Long id){
+
+    public List<Book> findAllByUserId(Long id) {
         return this.bookRepository.findAllByUserId(id);
     }
 

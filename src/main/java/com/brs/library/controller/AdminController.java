@@ -4,6 +4,7 @@ import com.brs.library.entity.Book;
 import com.brs.library.entity.Order;
 import com.brs.library.service.BookService;
 import com.brs.library.service.OrderService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,7 +51,7 @@ public class AdminController {
                 .name(name)
                 .build();
         this.bookService.saveNewBook(newBook);
-        return "admin";
+        return "redirect:";
     }
     @PostMapping("/edit-book")
     public String editBook(String name){
@@ -63,8 +64,10 @@ public class AdminController {
     }
 
     @PostMapping("/accept-order")
-    public String acceptOrder(Long bookId, Long usrId, Long orderId){
-        this.orderService.acceptOrder(bookId, usrId, orderId);
+    public String acceptOrder(Long bookId, Long userId, Long orderId){
+        log.warn(new String(userId + ""));
+        log.warn(new String(bookId + ""));
+        this.orderService.acceptOrder(bookId, userId, orderId);
         return "redirect:orders";
     }
     @PostMapping("/decline-order")

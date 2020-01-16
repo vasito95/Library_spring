@@ -2,32 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dbecc323-12fa-4ada-a221-5c7eb10f4db5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/dto/OrderDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/public/error.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/addbook.mustache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.mustache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/orders.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AllBooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AllBooksController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/MyBooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/MyBooksController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/OrderBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/OrderBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/PageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/entity/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/repository/BookRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/allbooks.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/allbooks.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addbook.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addbook.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mybooks.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mybooks.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/orderbook.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/orderbook.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/brs/library/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/brs/library/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/orders.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/orders.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +148,7 @@
       <workItem from="1578823859721" duration="26580000" />
       <workItem from="1578903056005" duration="7435000" />
       <workItem from="1579109064161" duration="23140000" />
-      <workItem from="1579163517761" duration="13958000" />
+      <workItem from="1579163517761" duration="19208000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1578833088837</created>
@@ -217,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579138483627</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Admin access added">
+      <created>1579177692730</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1579177692730</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +256,8 @@
     <MESSAGE value="MyBooks done" />
     <MESSAGE value="User Side done except placing order" />
     <MESSAGE value="Bugs fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugs fixed" />
+    <MESSAGE value="Admin access added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Admin access added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Assign_Data_Sources" timestamp="1578839041842">
@@ -294,46 +284,46 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="605" y="143" key="#com.intellij.ide.util.MemberChooser/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1578860998632" />
-    <state x="424" y="28" key="CommitChangelistDialog2" timestamp="1579177659306">
+    <state x="424" y="28" key="CommitChangelistDialog2" timestamp="1579177689770">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state x="424" y="28" key="CommitChangelistDialog2/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659306" />
+    <state x="424" y="28" key="CommitChangelistDialog2/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177689770" />
     <state x="634" y="335" key="GitRewordDialog" timestamp="1579138523199">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="634" y="335" key="GitRewordDialog/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579138523199" />
-    <state width="1431" height="224" key="GridCell.Tab.0.bottom" timestamp="1579177659345">
+    <state width="1431" height="224" key="GridCell.Tab.0.bottom" timestamp="1579182666537">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.bottom/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659345" />
-    <state width="1431" height="224" key="GridCell.Tab.0.center" timestamp="1579177659345">
+    <state width="1431" height="224" key="GridCell.Tab.0.bottom/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666537" />
+    <state width="1431" height="224" key="GridCell.Tab.0.center" timestamp="1579182666537">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.center/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659345" />
-    <state width="1431" height="224" key="GridCell.Tab.0.left" timestamp="1579177659345">
+    <state width="1431" height="224" key="GridCell.Tab.0.center/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666537" />
+    <state width="1431" height="224" key="GridCell.Tab.0.left" timestamp="1579182666537">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.left/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659345" />
-    <state width="1431" height="224" key="GridCell.Tab.0.right" timestamp="1579177659345">
+    <state width="1431" height="224" key="GridCell.Tab.0.left/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666537" />
+    <state width="1431" height="224" key="GridCell.Tab.0.right" timestamp="1579182666537">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.0.right/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659345" />
-    <state width="1431" height="224" key="GridCell.Tab.1.bottom" timestamp="1579177659346">
+    <state width="1431" height="224" key="GridCell.Tab.0.right/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666537" />
+    <state width="1431" height="224" key="GridCell.Tab.1.bottom" timestamp="1579182666538">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.1.bottom/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659346" />
-    <state width="1431" height="224" key="GridCell.Tab.1.center" timestamp="1579177659345">
+    <state width="1431" height="224" key="GridCell.Tab.1.bottom/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666538" />
+    <state width="1431" height="224" key="GridCell.Tab.1.center" timestamp="1579182666538">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.1.center/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659345" />
-    <state width="1431" height="224" key="GridCell.Tab.1.left" timestamp="1579177659345">
+    <state width="1431" height="224" key="GridCell.Tab.1.center/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666538" />
+    <state width="1431" height="224" key="GridCell.Tab.1.left" timestamp="1579182666538">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.1.left/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659345" />
-    <state width="1431" height="224" key="GridCell.Tab.1.right" timestamp="1579177659345">
+    <state width="1431" height="224" key="GridCell.Tab.1.left/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666538" />
+    <state width="1431" height="224" key="GridCell.Tab.1.right" timestamp="1579182666538">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="224" key="GridCell.Tab.1.right/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579177659345" />
+    <state width="1431" height="224" key="GridCell.Tab.1.right/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579182666538" />
     <state width="1431" height="277" key="GridCell.Tab.2.bottom" timestamp="1579138547452">
       <screen x="62" y="0" width="1474" height="864" />
     </state>

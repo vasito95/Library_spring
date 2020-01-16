@@ -19,8 +19,8 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private Long userId;
     private LocalDate inUseBy;
     private Boolean isInUse;
+    private String name;
+    private Long userId;
 }
