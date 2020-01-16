@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container p-5">
+    <div class="row">
+        <div class="col-sm text-center">
+            <a class="border p-3 text-danger" href="/admin/add-book">Add Book</a>
+        </div>
+        <div class="col-sm text-center">
+            <a class="border p-3 text-danger" href="/admin/orders">Confirm Orders</a>
+        </div>
+        <div class="col-sm text-center">
+            <a class="border p-3 text-danger" href="/admin/edit-book">Edit Book</a>
+        </div>
+
+        <div class="col-sm text-center">
+            <a class="border p-3" href="/all-books">Back to User </a>
+        </div>
+
+        <div class="col-sm text-center">
+            <form action="/logout" method="post">
+                <input id="button" type="submit" value="Sign Out"/>
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Date to</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#orders}}
+                    <tr>
+                            <th scope="row">{{id}}</th>
+                            <td>{{bookName}}</td>
+                            <td>{{userName}}</td>
+                            <td>{{dateTo}}</td>
+                            <td>
+                        <form action="/admin/accept-order" method="post">
+                            <input type="hidden" value="{{bookId}}" name="bookId">
+                            <input type="hidden" value="{{usrId}}" name="userId">
+                            <input type="hidden" value="{{id}}" name="orderId">
+                            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            <input type="submit" class="btn btn-outline-success m-1 " value="Accept">
+                        </form>
+                        <form action="/admin/decline-order" method="post">
+                            <input type="hidden" value="{{id}}" name="orderId">
+                            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            <input type="submit" class="btn btn-outline-danger m-1" value="Decline">
+                        </form>
+                            </td>
+                    </tr>
+                {{/orders}}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

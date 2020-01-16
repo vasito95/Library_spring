@@ -12,12 +12,14 @@ import java.time.LocalDate;
 @Setter
 
 @Entity
-@Table(name = "book_order")
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long usrId;
     private Long bookId;
+    private String userName;
+    private String bookName;
     private LocalDate dateTo;
 }

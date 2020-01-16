@@ -8,11 +8,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Map;
+
 @Slf4j
 
 @Controller
@@ -21,17 +20,25 @@ public class OrderBookController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/orderbook")
-    public String getOrderBook(){
+    @GetMapping("/order-book")
+    public String getOrderBook() {
         return "orderbook";
     }
 
-    @PostMapping("/orderbook")
-    public String placeOrder(String name, Date dateTo, Map<String, Object> model){
-        log.warn(dateTo.toString());
-        log.warn("1111111111");
+    @PostMapping("/order-book")
+    public String placeOrder(String name, String dateTo, Map<String, Object> model) {
         Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        this.orderService.placeOrder(name, LocalDate.of(dateTo.getYear(),dateTo.getMonth(), dateTo.getDay()), id);
-        return "redirect:/orderbook";
+        String userName = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        if(!dateTo.equals("")){
+            LocalDate date = LocalDate.parse(dateTo);
+            //TODO check if date is less then mounth
+                this.orderService.placeOrder(name, userName, date, id);
+        } else {
+            model.put("message", "Date is not correct");
+        }
+        log.warn(dateTo);
+        log.warn(name);
+        log.warn(id.toString());
+        return "redirect:/order-book";
     }
 }

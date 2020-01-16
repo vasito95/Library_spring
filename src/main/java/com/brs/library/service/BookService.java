@@ -6,6 +6,7 @@ import com.brs.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -22,6 +23,13 @@ public class BookService {
     public void saveNewBook(Book b) {
         this.bookRepository.save(b);
     }
+
+    @Transactional
+    public void updateBook(Long id, Long userId){
+        this.bookRepository.updateBookUserIdAndIsInUse(true, userId, id);
+    }
+
+
 
     public List<Book> findAll() {
         return this.bookRepository.findAll();
@@ -44,6 +52,5 @@ public class BookService {
         return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, isInUse)
                 : this.bookRepository.findAllWhereNameLike(pattern);
     }
-
 
 }

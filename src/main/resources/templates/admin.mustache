@@ -5,51 +5,31 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Document</title>
 </head>
 <body>
 <div class="container p-5">
     <div class="row">
 
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/order-book">Order another book</a>
+            <a class="border p-3 text-danger" href="/admin/add-book">Add Book</a>
         </div>
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/all-books">All Books</a>
+            <a class="border p-3 text-danger" href="/admin/orders">Confirm Orders</a>
         </div>
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/my-books">My Books</a>
+            <a class="border p-3 text-danger" href="/admin/edit-book">Edit Book</a>
         </div>
+
+        <div class="col-sm text-center">
+            <a class="border p-3" href="/all-books">Back to User </a>
+        </div>
+
         <div class="col-sm text-center">
             <form action="/logout" method="post">
                 <input id="button" type="submit" value="Sign Out"/>
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col text-center text-danger">
-            {{#message}}
-                <h3>{{message}}</h3>
-            {{/message}}
-        </div>
-    </div>
-</div>
-<div class="container p-5">
-    <div class="row">
-        <div class="col text-center">
-            <form action="/order-book" method="POST">
-                <input class="form-control" type="text" name="name" placeholder="Input Name">
-                <label for="dateTo">Date from today to:</label>
-                <input type="date" name="dateTo">
-                <input type="submit" class="btn btn-success" value="Place Order">
                 <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
             </form>
         </div>

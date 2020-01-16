@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 
 @Controller
-@RequestMapping("/allbooks")
+@RequestMapping("/all-books")
 public class AllBooksController {
 
     @Autowired

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Builder
 @ToString
 @Getter
+@Setter
 
 @Entity
 @Table(name = "books")
