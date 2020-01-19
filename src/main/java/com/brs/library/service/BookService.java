@@ -12,8 +12,11 @@ import java.util.List;
 @Service
 public class BookService {
 
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
 
     public Book findById(Long id) {
@@ -24,16 +27,13 @@ public class BookService {
         this.bookRepository.save(b);
     }
 
+
     @Transactional
     public void updateBook(Long bookId, Long userId) {
-        this.bookRepository.save(updateUserId(bookId, userId));
-        //this.bookRepository.updateBookUserIdAndIsInUse(false, userId, bookId);
-    }
-
-    private Book updateUserId(Long bookId, Long userId) {
         Book book = this.bookRepository.getOne(bookId);
         book.setUserId(userId);
-        return book;
+        this.bookRepository.save(book);
+        //this.bookRepository.updateBookUserIdAndIsInUse(false, userId, bookId);
     }
 
     public List<Book> findAll() {

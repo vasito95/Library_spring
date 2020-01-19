@@ -39,4 +39,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1")
     List<Book> findAllWhereNameLike(String n);
+
 }

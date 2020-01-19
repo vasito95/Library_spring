@@ -4,16 +4,14 @@ import com.brs.library.entity.Book;
 import com.brs.library.entity.Order;
 import com.brs.library.service.BookService;
 import com.brs.library.service.OrderService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Map;
 @Slf4j
 
 @Controller
@@ -21,48 +19,53 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
 
-    @Autowired
-    private BookService bookService;
+    private final BookService bookService;
+
+    public AdminController(OrderService orderService, BookService bookService) {
+        this.orderService = orderService;
+        this.bookService = bookService;
+    }
 
     @GetMapping
-    public String getAdmin(){
+    public String getAdmin() {
         return "admin";
     }
 
     @GetMapping("/add-book")
-    public String getAddBook( Map<String, Object> model){
+    public String getAddBook(Model model) {
         Iterable<Book> books = this.bookService.findAll();
-        model.put("books", books);
+        model.addAttribute("books", books);
         return "addbook";
     }
 
     @GetMapping("/orders")
-    public String getOrders( Map<String, Object> model){
+    public String getOrders(Model model) {
         Iterable<Order> orders = this.orderService.findAll();
-        model.put("orders", orders);
+        model.addAttribute("orders", orders);
         return "orders";
     }
+
     @GetMapping("/library")
-    public String getLibrary( Map<String, Object> model){
+    public String getLibrary(Model model) {
         Iterable<Book> books = this.bookService.findAll();
-        model.put("books", books);
+        model.addAttribute("books", books);
         return "library";
     }
 
     @PostMapping("/add-book")
-    public String addNewWord(String name){
+    public String addNewWord(String name) {
         Book newBook = Book.builder()
                 .isInUse(false)
                 .name(name)
                 .build();
         this.bookService.saveNewBook(newBook);
-        return "redirect:/addbook";
+        return "redirect:add-book";
     }
+
     @PostMapping("/edit-book")
-    public String editBook(String name){
+    public String editBook(String name) {
         Book newBook = Book.builder()
                 .isInUse(false)
                 .name(name)
@@ -72,14 +75,15 @@ public class AdminController {
     }
 
     @PostMapping("/accept-order")
-    public String acceptOrder(Long bookId, Long userId, Long orderId){
+    public String acceptOrder(Long bookId, Long userId, Long orderId) {
         log.warn(new String(userId + ""));
         log.warn(new String(bookId + ""));
         this.orderService.acceptOrder(bookId, userId, orderId);
         return "redirect:orders";
     }
+
     @PostMapping("/decline-order")
-    public String declineOrder(Long orderId){
+    public String declineOrder(Long orderId) {
         this.orderService.deleteOrderById(orderId);
         return "redirect:orders";
     }

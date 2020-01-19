@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -29,7 +29,7 @@
         <div class="col-sm text-center">
             <form action="/logout" method="post">
                 <input id="button" type="submit" value="Sign Out"/>
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
     </div>
@@ -49,29 +49,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#orders}}
-                    <tr>
-                            <th scope="row">{{id}}</th>
-                            <td>{{bookName}}</td>
-                            <td>{{userName}}</td>
-                            <td>{{dateTo}}</td>
+                    <tr th:each="order : ${orders}">
+                            <th scope="row" th:text="${order.id}"></th>
+                            <td th:text="${order.bookName}"></td>
+                            <td th:text="${order.userName}"></td>
+                            <td th:text="${order.dateTo}"></td>
                             <td>
                         <form action="/admin/accept-order" method="post">
-                            <input type="hidden" value="{{bookId}}" name="bookId">
-                            <input type="hidden" value="{{usrId}}" name="userId">
-                            <input type="hidden" value="{{id}}" name="orderId">
-                            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            <input type="hidden" th:value="${order.bookId}" name="bookId">
+                            <input type="hidden" th:value="${order.usrId}" name="userId">
+                            <input type="hidden" th:value="${order.id}" name="orderId">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             <input type="submit" class="btn btn-outline-success m-1 " value="Accept">
                         </form>
                         <form action="/admin/decline-order" method="post">
-                            <input type="hidden" value="{{id}}" name="orderId">
-                            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            <input type="hidden" th:value="${order.id}" name="orderId">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             <input type="submit" class="btn btn-outline-danger m-1" value="Decline">
                         </form>
                             </td>
                     </tr>
-                {{/orders}}
-
                 </tbody>
             </table>
 

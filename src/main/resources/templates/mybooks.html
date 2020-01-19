@@ -1,13 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 <div class="container p-5">
@@ -28,22 +27,8 @@
         <div class="col-sm text-center">
             <form action="/logout" method="post">
                 <input id="button" type="submit" value="Sign Out"/>
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="container p-5">
-    <div class="row">
-        <div class="col text-center">
-                <form method="get" action="/all-books">
-                    <input class="form-control" type="text" name="filter" placeholder="Filter">
-                    <label for="isFree">Free only</label>
-                    <input type="checkbox" name="isFree">
-                    <button class="btn btn-outline-secondary" type="submit">Filter</button>
-                </form>
         </div>
     </div>
 </div>
@@ -53,11 +38,18 @@
         <div class="col-md-12 text-center">
             <div>Book list</div>
 
-            <ul class="list-group">
-                {{#books}}
-                    <li class="list-group-item">{{id}}  {{name}}  {{isInUse}}</li>
-                {{/books}}
-            </ul>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Is in Use</th>
+                </tr>
+                </thead>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.name}"></td>
+                    <td th:text="${book.isInUse}"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

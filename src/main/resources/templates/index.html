@@ -1,12 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/vendor.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Document</title>
+
+    <title>Library</title>
 </head>
 <body>
 <div class="container p-5">
@@ -27,25 +29,21 @@
         <div class="col-sm text-center">
             <form action="/logout" method="post">
                 <input id="button" type="submit" value="Sign Out"/>
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
     </div>
 </div>
 
+
 <div class="container p-5">
     <div class="row">
-        <div class="col-md-12 text-center">
-            <div>Book list</div>
-
-            <ul class="list-group">
-                {{#books}}
-                    <li class="list-group-item">{{id}}  {{name}}  {{isInUse}}</li>
-                {{/books}}
-            </ul>
+        <div class="col text-center">
+                <h1 class="text-success"
+                    th:if="${name} != null"
+                    th:text="'Welcome '+ ${name}"></h1>
         </div>
     </div>
 </div>
-
 </body>
 </html>

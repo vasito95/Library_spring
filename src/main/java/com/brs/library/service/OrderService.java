@@ -12,10 +12,13 @@ import java.util.List;
 
 @Service
 public class OrderService {
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private BookService bookService;
+    private final OrderRepository orderRepository;
+    private final BookService bookService;
+
+    public OrderService(OrderRepository orderRepository, BookService bookService) {
+        this.orderRepository = orderRepository;
+        this.bookService = bookService;
+    }
 
     public void placeOrder(String bookName, String userName, LocalDate dateTo, Long userId) {
         Book book = this.bookService.findByName(bookName);

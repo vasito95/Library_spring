@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -17,8 +18,11 @@ import java.util.Map;
 @Controller
 public class OrderBookController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
+
+    public OrderBookController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @GetMapping("/order-book")
     public String getOrderBook() {
@@ -26,7 +30,7 @@ public class OrderBookController {
     }
 
     @PostMapping("/order-book")
-    public String placeOrder(String name, String dateTo, Map<String, Object> model) {
+    public String placeOrder(String name, String dateTo, Model model) {
         Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         String userName = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         if(!dateTo.equals("")){
@@ -34,7 +38,7 @@ public class OrderBookController {
             //TODO check if date is less then mounth
                 this.orderService.placeOrder(name, userName, date, id);
         } else {
-            model.put("message", "Date is not correct");
+            model.addAttribute("message", "Date is not correct");
         }
         log.warn(dateTo);
         log.warn(name);
