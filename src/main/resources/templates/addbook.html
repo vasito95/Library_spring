@@ -13,34 +13,38 @@
 <div class="container p-5">
     <div class="row">
         <div class="col-sm text-center">
-            <a class="border p-3 text-danger" href="/admin/add-book">Add Book</a>
+            <a class="border p-3 text-danger" href="/admin/add-book" th:text="#{system.menu.add.book}"></a>
         </div>
         <div class="col-sm text-center">
-            <a class="border p-3 text-danger" href="/admin/orders">Confirm Orders</a>
+            <a class="border p-3 text-danger" href="/admin/orders" th:text="#{system.menu.confirm}"></a>
         </div>
         <div class="col-sm text-center">
-            <a class="border p-3 text-danger" href="/admin/library">Library</a>
+            <a class="border p-3 text-danger" href="/admin/library" th:text="#{system.menu.library}"></a>
         </div>
 
         <div class="col-sm text-center">
-            <a class="border p-3" href="/all-books">Back to User </a>
+            <a class="border p-3" href="/all-books" th:text="#{system.menu.back.user}"></a>
         </div>
-
+        <div class="col-sm text-center">
+            <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
+            <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
+        </div>
         <div class="col-sm text-center">
             <form action="/logout" method="post">
-                <input id="button" type="submit" value="Sign Out"/>
+                <input id="button" type="submit" th:value="#{system.button.logout}"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col text-center">
             <form action="/admin/add-book" method="post">
                 <input class="form-control" type="text" name="name" placeholder="Input book name">
                 <input type="submit" value="Add"/>
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
     </div>
@@ -56,24 +60,18 @@
                     <th scope="col">#</th>
                     <th scope="col">Book Name</th>
                     <th scope="col">Date to</th>
+                    <th scope="col">User name</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{#books}}
-                    <tr>
-                        <th scope="row">{{id}}</th>
-                        <td>{{name}}</td>
-                        <td>
-                            {{#inUseBy}}
-                                inUseBy
-                            {{/inUseBy}}
-                        </td>
-                    </tr>
-                {{/books}}
-
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.id}"></td>
+                    <td th:text="${book.name}"></td>
+                    <td th:text="${book.inUseBy}"></td>
+                    <td th:if="${book.user} != null" th:text="${book.user.getUsername()}"></td>
+                </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

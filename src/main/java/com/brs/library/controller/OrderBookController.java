@@ -25,7 +25,9 @@ public class OrderBookController {
     }
 
     @GetMapping("/order-book")
-    public String getOrderBook() {
+    public String getOrderBook(Model model) {
+        model.addAttribute("minDate", LocalDate.now());
+        model.addAttribute("maxDate", LocalDate.now().plusMonths(1L));
         return "orderbook";
     }
 
@@ -33,10 +35,16 @@ public class OrderBookController {
     public String placeOrder(String name, String dateTo, Model model) {
         Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         String userName = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
+        model.addAttribute("message", null);
         if(!dateTo.equals("")){
             LocalDate date = LocalDate.parse(dateTo);
-            //TODO check if date is less then mounth
+            //TODO check if date is less then month
+            try{
                 this.orderService.placeOrder(name, userName, date, id);
+            } catch (RuntimeException e) {
+                model.addAttribute("message", "Book not found");
+            }
         } else {
             model.addAttribute("message", "Date is not correct");
         }

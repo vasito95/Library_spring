@@ -75,10 +75,8 @@ public class AdminController {
     }
 
     @PostMapping("/accept-order")
-    public String acceptOrder(Long bookId, Long userId, Long orderId) {
-        log.warn(new String(userId + ""));
-        log.warn(new String(bookId + ""));
-        this.orderService.acceptOrder(bookId, userId, orderId);
+    public String acceptOrder(Long orderId) {
+        this.orderService.acceptOrder(orderId);
         return "redirect:orders";
     }
 

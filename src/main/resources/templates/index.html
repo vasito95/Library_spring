@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,22 +13,26 @@
 <body>
 <div class="container p-5">
     <div class="row">
-
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/order-book">Order another book</a>
+            <a class="border p-3 text-danger" href="/admin/add-book" th:text="#{system.menu.add.book}"></a>
         </div>
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/all-books">All Books</a>
+            <a class="border p-3 text-danger" href="/admin/orders" th:text="#{system.menu.confirm}"></a>
         </div>
         <div class="col-sm text-center">
+            <a class="border p-3 text-danger" href="/admin/library" th:text="#{system.menu.library}"></a>
+        </div>
 
-            <a class="border p-3" href="/my-books">My Books</a>
+        <div class="col-sm text-center">
+            <a class="border p-3" href="/all-books" th:text="#{system.menu.back.user}"></a>
+        </div>
+        <div class="col-sm text-center">
+            <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
+            <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
         </div>
         <div class="col-sm text-center">
             <form action="/logout" method="post">
-                <input id="button" type="submit" value="Sign Out"/>
+                <input id="button" type="submit" th:value="#{system.button.logout}"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
@@ -39,9 +43,10 @@
 <div class="container p-5">
     <div class="row">
         <div class="col text-center">
+            <a href="?lang=ua">UA</a>
                 <h1 class="text-success"
                     th:if="${name} != null"
-                    th:text="'Welcome '+ ${name}"></h1>
+                    th:text="#{system.label.welcome}+' '+ ${name}"></h1>
         </div>
     </div>
 </div>

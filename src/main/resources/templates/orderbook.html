@@ -14,29 +14,31 @@
     <div class="row">
 
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/order-book">Order another book</a>
+            <a class="border p-3" href="/order-book" th:text="#{system.menu.order.book}"></a>
         </div>
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/all-books">All Books</a>
+            <a class="border p-3" href="/all-books" th:text="#{system.menu.all.books}"></a>
         </div>
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/my-books">My Books</a>
+            <a class="border p-3" href="/my-books" th:text="#{system.menu.my.books}"></a>
+        </div>
+        <div class="col-sm text-center">
+            <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
+            <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
         </div>
         <div class="col-sm text-center">
             <form action="/logout" method="post">
-                <input id="button" type="submit" value="Sign Out"/>
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <input id="button" type="submit" th:value="#{system.button.logout}"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col text-center text-danger">
-            <span class="text-danger" th:if="${message} != null"  th:text="${message}"></span>
+            <span class="text-danger" th:if="${message} != null" th:text="${message}"></span>
         </div>
     </div>
 </div>
@@ -44,9 +46,9 @@
     <div class="row">
         <div class="col text-center">
             <form action="/order-book" method="POST">
-                <input class="form-control" type="text" name="name" placeholder="Input Name">
+                <input class="form-control" type="text" name="name" placeholder="Input Name"/>
                 <label for="dateTo">Date from today to:</label>
-                <input id="dateTo" type="date" name="dateTo">
+                <input id="dateTo" type="date" th:min="${minDate}"  th:max="${maxDate}" name="dateTo">
                 <input type="submit" class="btn btn-success" value="Place Order">
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>

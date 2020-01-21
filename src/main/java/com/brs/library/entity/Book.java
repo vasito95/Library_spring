@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @ToString
 @Getter
 @Setter
+@EqualsAndHashCode
 
 @Entity
 @Table(name = "books")
@@ -22,6 +24,12 @@ public class Book {
     private LocalDate inUseBy;
     private Boolean isInUse;
     private String name;
-    private Long userId;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name="authors", joinColumns = @JoinColumn(name = "book_id"))
+    private List<String> authors;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
 }

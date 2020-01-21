@@ -19,19 +19,16 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Override
     List<Book> findAll();
 
-    Book findBookById(Long id);
-
     @Override
     void deleteById(Long aLong);
 
-    Book findBookByName(String name);
+    Optional<Book> findBookByName(String name);
 
-   // @Query(value = "SELECT * FROM books WHERE user_id=id", nativeQuery = true)
     List<Book> findAllByUserId(Long id);
 
     @Modifying
-    @Query(value = "UPDATE Book b set b.isInUse=?1 , b.userId=?2, b.inUseBy=?3 where b.id=?4")
-    void updateBookUserIdAndIsInUse(Boolean isInUser, Long userId, LocalDate dateBy, Long bookId);
+    @Query(value = "UPDATE Book b set b.isInUse=?1 , b.inUseBy=?2 where b.id=?3")
+    void updateBookInUseByAndIsInUse(Boolean isInUser, LocalDate dateBy, Long bookId);
 
     @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1 AND b.isInUse=?2")
     List<Book> findAllWhereNameLikeAndIsInUseEquals(String n, Boolean isFree);

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -20,9 +21,14 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
+    @Column(nullable = false)
     private String username;
+    @Column(unique = true, nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String phoneNumber;
     private String password;
     private Boolean isActive;
 
@@ -30,6 +36,9 @@ public class User implements UserDetails {
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user" , fetch = FetchType.EAGER)
+    private Set<Book> books;
 
 
     @Override

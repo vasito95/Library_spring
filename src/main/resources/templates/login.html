@@ -1,32 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    <title>Library</title>
+    <meta charset="UTF-8">
 
-    <link th:href="@{/css/theme.css}" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet"  type="text/css" th:href="@{/css/vendor.css}" />
+    <link th:href="@{/css/theme.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/vendor.css}"/>
 </head>
 <body>
-
-<div class="container">
-    <div class="row text-center">
-        <span class="text-danger" th:if="${message} != null"  th:text="${message}"></span>
-    </div>
-</div>
-
-<div class="container p-5">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <div>
-                <form action="/login" method="post">
-                    <label> User Name : <input class="form-control" type="text" name="username"/> </label>
-                    <label> Password: <input class="form-control" type="password" name="password"/> </label>
-                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                    <div><input class="btn btn-outline-secondary" type="submit" value="Sign In"/></div>
-                </form>
+<div class="auth">
+    <div class="auth-container">
+        <div class="card">
+            <header class="auth-header">
+                <h1 class="auth-title">
+                    <div class="logo">
+                        <span class="l l1"></span>
+                        <span class="l l2"></span>
+                        <span class="l l3"></span>
+                        <span class="l l4"></span>
+                        <span class="l l5"></span>
+                    </div>
+                    Library
+                </h1><div class="col-sm text-center">
+                <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
+                <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
             </div>
-            <a class="test-danger" href="/registration">Registration</a>
+            </header>
+            <div class="auth-content">
+                <p class="text-xs-center text-muted" th:text="#{login.label.signin}" ></p>
+                <div class="container">
+                    <div class="row text-center">
+                        <span class="text-danger" th:if="${message} != null" th:text="${message}"></span>
+                    </div>
+                </div>
+                <form action="/login" method="post">
+                    <label for="email" th:text="#{input.username}"></label>
+                    <input type="text"
+                           class="text-muted form-control underlined"
+                           id="email"
+                           name="username"
+                           placeholder="Input username" value="admin"
+                    >
+
+                    <label for="password" th:text="#{input.password}"></label>
+                    <input
+                            type="password"
+                            class="text-muted form-control underlined"
+                            id="password"
+                            name="password"
+                            placeholder="Password"
+                            value="admin"
+                    >
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <div class="form-group">
+                        <button
+                                type="submit"
+                                class="btn btn-block btn-primary"
+                                th:text="#{login.button.signin}"
+                        >
+                        </button>
+                    </div>
+                    <div class="form-group text-center">
+
+                        <p class="text-muted text-xs-center"
+                           th:text="#{login.label.noaccount}">
+                        </p>
+                        <a href="/registration"
+                           th:text="#{login.label.register}"></a>
+
+
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
 </div>

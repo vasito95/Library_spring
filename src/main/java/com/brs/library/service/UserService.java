@@ -37,5 +37,7 @@ public class UserService implements UserDetailsService {
         return this.userRepository.findAll();
     }
 
-    ;
+    public User getUserById(Long id){
+        return this.userRepository.getUserById(id).get();
+    }
 }

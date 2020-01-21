@@ -13,20 +13,21 @@
     <div class="row">
 
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/order-book">Order another book</a>
+            <a class="border p-3" href="/order-book" th:text="#{system.menu.order.book}"></a>
         </div>
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/all-books">All Books</a>
+            <a class="border p-3" href="/all-books" th:text="#{system.menu.all.books}"></a>
         </div>
         <div class="col-sm text-center">
-
-            <a class="border p-3" href="/my-books">My Books</a>
+            <a class="border p-3" href="/my-books" th:text="#{system.menu.my.books}"></a>
+        </div>
+        <div class="col-sm text-center">
+            <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
+            <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
         </div>
         <div class="col-sm text-center">
             <form action="/logout" method="post">
-                <input id="button" type="submit" value="Sign Out"/>
+                <input id="button" type="submit" th:value="#{system.button.logout}"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
@@ -36,13 +37,13 @@
 <div class="container p-5">
     <div class="row">
         <div class="col-md-12 text-center">
-            <div>Book list</div>
+            <div th:text="#{system.book.list}"></div>
 
             <table>
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Is in Use</th>
+                    <th th:text="#{system.book.name}"></th>
+                    <th th:text="#{system.book.isinuse}"></th>
                 </tr>
                 </thead>
                 <tr th:each="book : ${books}">

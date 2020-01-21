@@ -43,8 +43,9 @@ public class OrderService {
         this.orderRepository.deleteById(id);
     }
 
-    public void acceptOrder(Long bookId, Long userId, Long orderId){
-        this.bookService.updateBook(bookId, userId);
+    public void acceptOrder(Long orderId){
+        Order order = orderRepository.getOne(orderId);
+        this.bookService.updateBook(order);
         this.deleteOrderById(orderId);
     }
 
