@@ -16,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode
 
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class Book {
     private String name;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name="authors", joinColumns = @JoinColumn(name = "book_id"))
+    @CollectionTable(name="author", joinColumns = @JoinColumn(name = "book_id"))
     private List<String> authors;
 
     @ManyToOne(fetch = FetchType.EAGER)

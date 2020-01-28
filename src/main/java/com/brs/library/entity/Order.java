@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 
 @Entity
-@Table(name = "orders")
+@Table(name = "order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

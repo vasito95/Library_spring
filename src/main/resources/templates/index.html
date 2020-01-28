@@ -1,53 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" th:href="@{/css/vendor.css}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
     <title>Library</title>
+    <meta charset="UTF-8">
+
+    <link th:href="@{/css/theme.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/vendor.css}" type="text/css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
-<div class="container p-5">
-    <div class="row">
-        <div class="col-sm text-center">
-            <a class="border p-3 text-danger" href="/admin/add-book" th:text="#{system.menu.add.book}"></a>
-        </div>
-        <div class="col-sm text-center">
-            <a class="border p-3 text-danger" href="/admin/orders" th:text="#{system.menu.confirm}"></a>
-        </div>
-        <div class="col-sm text-center">
-            <a class="border p-3 text-danger" href="/admin/library" th:text="#{system.menu.library}"></a>
-        </div>
+<div class="main-wrapper">
+    <div class="app">
+        <header class="header">
+            <div class="header-block header-block-search">
 
-        <div class="col-sm text-center">
-            <a class="border p-3" href="/all-books" th:text="#{system.menu.back.user}"></a>
-        </div>
-        <div class="col-sm text-center">
-            <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
-            <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
-        </div>
-        <div class="col-sm text-center">
-            <form action="/logout" method="post">
-                <input id="button" type="submit" th:value="#{system.button.logout}"/>
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-            </form>
-        </div>
-    </div>
-</div>
+            </div>
+            <div class="header-block header-block-nav">
+                <ul class="nav-profile">
+                    <li class="profile">
+                        <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
+                    </li>
+                    <li class="profile">
+                        <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
+                    </li>
+                    <li id="dropdown" class="profile dropdown">
+                        <a class="nav-link dropdown-toggle" role="button">
+                              <span class="name" th:if="${name} != null"
+                                    th:text="#{system.label.welcome}+' '+ ${name}">
+                              </span>
+                        </a>
+                        <div class="dropdown-menu profile-dropdown-menu">
+                            <a class="dropdown-item"
+                               href="/admin"
+                               th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
+                               th:inline="text"
+                            > <i class="fa fa-gear icon"></i>[[#{system.menu.admin}]]</a>
+                            <div class="dropdown-divider"></div>
+                            <form action="/logout" method="post">
+                                <button class="dropdown-item" id="button" type="submit" th:inline="text"><i class="fa fa-sign-out icon"></i>[[#{system.button.logout}]]</button>
+                                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
 
+        <aside class="sidebar">
+            <div class="sidebar-container">
+                <div class="sidebar-header">
+                    <div class="brand">
+                        <div class="logo">
+                            <span class="l l1"></span>
+                            <span class="l l2"></span>
+                            <span class="l l3"></span>
+                            <span class="l l4"></span>
+                            <span class="l l5"></span>
+                        </div>
+                        Library
+                    </div>
+                </div>
+                <nav class="menu">
+                    <ul class="nav metismenu">
+                        <li>
+                            <a href="/order-book" th:inline="text"> <i class="fa fa-plus-square"></i> [[#{system.menu.order.book}]]</a>
+                        </li>
+                        <li>
+                            <a href="/all-books" th:inline="text"> <i class="fa fa-archive"></i> [[#{system.menu.all.books}]]</a>
+                        </li>
+                        <li>
+                            <a href="/my-books" th:inline="text"> <i class="fa fa-building-o"> </i>[[#{system.menu.my.books}]]</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <article class="content dashboard-page">
 
-<div class="container p-5">
-    <div class="row">
-        <div class="col text-center">
-            <a href="?lang=ua">UA</a>
-                <h1 class="text-success"
-                    th:if="${name} != null"
-                    th:text="#{system.label.welcome}+' '+ ${name}"></h1>
-        </div>
+        </article>
     </div>
 </div>
 </body>

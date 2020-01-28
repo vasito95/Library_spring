@@ -22,13 +22,14 @@
                         <span class="l l5"></span>
                     </div>
                     Library
-                </h1><div class="col-sm text-center">
-                <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
-                <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
-            </div>
+                </h1>
+                <div>
+                    <a href="?lang=ua" th:text="#{lang.ua}"></a>
+                    <a href="?lang=en" th:text="#{lang.eng}"></a>
+                </div>
             </header>
             <div class="auth-content">
-                <p class="text-xs-center text-muted" th:text="#{login.label.signin}" ></p>
+                <p class="text-xs-center text-muted" th:text="#{login.label.signin}"></p>
                 <div class="container">
                     <div class="row text-center">
                         <span class="text-danger" th:if="${message} != null" th:text="${message}"></span>
@@ -39,8 +40,8 @@
                     <input type="text"
                            class="text-muted form-control underlined"
                            id="email"
-                           name="name"
-                           value="admin"
+                           name="email"
+                           value="admin@gmail.com"
                     >
 
                     <label for="password" th:text="#{input.password}"></label>
@@ -49,7 +50,7 @@
                             class="text-muted form-control underlined"
                             id="password"
                             name="password"
-                            value="admin"
+                            value="123456789"
                     >
                     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                     <div class="form-group">

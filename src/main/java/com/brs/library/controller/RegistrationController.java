@@ -37,7 +37,7 @@ public class RegistrationController {
         if(errors.hasErrors()){
             return "registration";
         }
-        user.setRoles(Collections.singleton(Role.USER));
+        user.setRoles(Collections.singleton(Role.ADMIN));
         user.setIsActive(true);
         try{
             userService.saveNewUser(user);

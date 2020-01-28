@@ -22,7 +22,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UserNotFoundException {
-        return this.userRepository.findByEmail(s).orElseThrow(() -> new UserNotFoundException("User with this email not found"));
+        return this.userRepository.findByEmail(s)
+                .orElseThrow(() -> new UserNotFoundException("User with this email not found"));
+    }
+
+    public User getUserById(Long id){
+        return this.userRepository.getUserById(id)
+                .orElseThrow(RuntimeException::new);
     }
 
     public void saveNewUser(User user) throws UsernameIsNotUniqueException {
@@ -37,7 +43,4 @@ public class UserService implements UserDetailsService {
         return this.userRepository.findAll();
     }
 
-    public User getUserById(Long id){
-        return this.userRepository.getUserById(id).orElseThrow(RuntimeException::new);
-    }
 }
