@@ -20,11 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(UserService userService, PasswordEncoder passwordEncoder) {
+    public SecurityConfig(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Bean
@@ -53,6 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //TODO remove deprecated
             auth.userDetailsService(userService)
-                    .passwordEncoder(passwordEncoder);
+                    .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 }

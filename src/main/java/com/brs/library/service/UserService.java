@@ -1,12 +1,12 @@
 package com.brs.library.service;
 
 import com.brs.library.entity.User;
+import com.brs.library.exceptions.UserNotFoundException;
+import com.brs.library.exceptions.UsernameIsNotUniqueException;
 import com.brs.library.repository.UserRepository;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,22 +15,22 @@ import java.util.List;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        UserDetails u = userRepository.findByUsername(s);
-        if (u != null) {
-            return u;
-        } else {
-            throw new UsernameNotFoundException("User not found");
-        }
+    public UserDetails loadUserByUsername(String s) throws UserNotFoundException {
+        return this.userRepository.findByEmail(s).orElseThrow(() -> new UserNotFoundException("User with this email not found"));
     }
 
-    public void saveNewUser(User user) {
-        this.userRepository.save(user);
+    public void saveNewUser(User user) throws UsernameIsNotUniqueException {
+        try{
+            this.userRepository.save(user);
+        } catch (Exception e){
+            throw new UsernameIsNotUniqueException(e.getMessage());
+        }
     }
 
     public List<User> findAll() {
@@ -38,6 +38,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserById(Long id){
-        return this.userRepository.getUserById(id).get();
+        return this.userRepository.getUserById(id).orElseThrow(RuntimeException::new);
     }
 }

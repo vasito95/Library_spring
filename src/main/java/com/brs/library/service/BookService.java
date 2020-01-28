@@ -20,29 +20,13 @@ public class BookService {
         this.userService = userService;
     }
 
-
+    //TODO create exception book not found
     public Book findById(Long id) {
-        return this.bookRepository.findById(id).get();
+        return this.bookRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public void saveNewBook(Book b) {
         this.bookRepository.save(b);
-    }
-
-    public void updateBook(Order order) {
-        Book book = Book.builder()
-                .id(order.getBookId())
-                .inUseBy(order.getDateTo())
-                .user(userService.getUserById(order.getUsrId()))
-                .isInUse(true)
-                .name(order.getBookName())
-                .build();
-        this.updateBookAsNew(book);
-    }
-    @Transactional
-    void updateBookAsNew(Book book){
-        if(!this.findById(book.getId()).getIsInUse())
-        this.bookRepository.save(book);
     }
 
     public List<Book> findAll() {
@@ -62,6 +46,23 @@ public class BookService {
         return this.bookRepository.findAllByUserId(id);
     }
 
+    public void updateBook(Order order) {
+        Book book = Book.builder()
+                .id(order.getBookId())
+                .inUseBy(order.getDateTo())
+                .user(userService.getUserById(order.getUsrId()))
+                .isInUse(true)
+                .name(order.getBookName())
+                .build();
+        this.updateBookAsNew(book);
+    }
+
+    @Transactional
+    void updateBookAsNew(Book book) {
+        if (!this.findById(book.getId()).getIsInUse())
+            this.bookRepository.save(book);
+    }
+
     public List<Book> findAllWhereNameLikeAndIsInUseEquals(String name, Boolean isInUse) {
         String pattern = "%" + name + "%";
         if (name == null) {
@@ -71,7 +72,5 @@ public class BookService {
         }
         return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, !isInUse)
                 : this.bookRepository.findAllWhereNameLike(pattern);
-
     }
-
 }
