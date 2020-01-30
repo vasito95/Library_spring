@@ -12,8 +12,9 @@ import java.time.LocalDate;
 @Setter
 
 @Entity
-@Table(name = "order")
+@Table(name = "book_order")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

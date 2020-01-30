@@ -36,7 +36,6 @@ public class OrderBookController {
         Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         String userName = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 
-        model.addAttribute("message", null);
         if(!dateTo.equals("")){
             LocalDate date = LocalDate.parse(dateTo);
             //TODO check if date is less then month
@@ -51,6 +50,6 @@ public class OrderBookController {
         log.warn(dateTo);
         log.warn(name);
         log.warn(id.toString());
-        return "redirect:/order-book";
+        return "orderbook";
     }
 }

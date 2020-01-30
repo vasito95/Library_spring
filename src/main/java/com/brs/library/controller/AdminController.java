@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Slf4j
 
@@ -55,10 +58,16 @@ public class AdminController {
     }
 
     @PostMapping("/add-book")
-    public String addNewWord(String name) {
+    public String addNewBook(@RequestParam("name") String name,
+                             @RequestParam("author") List<String> authors,
+                             @RequestParam("attribute") List<String> attributes) {
+        log.warn(authors.toString());
+        log.warn(attributes.toString());
         Book newBook = Book.builder()
                 .isInUse(false)
                 .name(name)
+                .attributes(attributes)
+                .authors(authors)
                 .build();
         this.bookService.saveNewBook(newBook);
         return "redirect:add-book";

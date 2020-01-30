@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Library</title>
     <meta charset="UTF-8">
@@ -85,9 +85,18 @@
                 </nav>
             </div>
         </aside>
+
         <article class="content dashboard-page">
             <form action="/admin/add-book" method="post">
                 <input class="form-control" type="text" name="name" placeholder="Input book name">
+                <h3>Authors</h3>
+                <input class="form-control" type="text" name="author" placeholder="Input author">
+                <input class="form-control" type="text" name="author" placeholder="Input author">
+                <input class="form-control" type="text" name="author" placeholder="Input author">
+                <h3>Attributes</h3>
+                <input class="form-control" type="text" name="attribute" placeholder="Input attribute">
+                <input class="form-control" type="text" name="attribute" placeholder="Input attribute">
+                <input class="form-control" type="text" name="attribute" placeholder="Input attribute">
                 <input type="submit" value="Add"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
@@ -96,16 +105,16 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Book Name</th>
-                    <th scope="col">Date to</th>
-                    <th scope="col">User name</th>
+                    <th scope="col">Authors</th>
+                    <th scope="col">Attributes</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="book : ${books}">
                     <td th:text="${book.id}"></td>
                     <td th:text="${book.name}"></td>
-                    <td th:text="${book.inUseBy}"></td>
-                    <td th:if="${book.user} != null" th:text="${book.user.getUsername()}"></td>
+                    <td th:text="${book.authors}"></td>
+                    <td th:text="${book.attributes}"></td>
                 </tr>
                 </tbody>
             </table>

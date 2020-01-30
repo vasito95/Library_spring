@@ -81,6 +81,7 @@
                 </nav>
             </div>
         </aside>
+
         <article class="content dashboard-page">
             <div th:text="#{system.book.list}"></div>
             <table class="table table-striped">
@@ -88,11 +89,19 @@
                 <tr>
                     <th th:text="#{system.book.name}"></th>
                     <th th:text="#{system.book.isinuse}"></th>
+                    <th th:text="#{system.book.return}"></th>
                 </tr>
                 </thead>
                 <tr th:each="book : ${books}">
                     <td th:text="${book.name}"></td>
                     <td th:text="${book.isInUse}"></td>
+                    <td>
+                        <form action="/my-books" method="post">
+                            <input type="hidden" th:value="${book.id}" name="bookId">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <input type="submit" class="btn btn-outline-danger" th:value="#{system.book.return}">
+                        </form>
+                    </td>
                 </tr>
             </table>
         </article>

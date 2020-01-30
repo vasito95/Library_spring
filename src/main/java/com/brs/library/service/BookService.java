@@ -46,6 +46,14 @@ public class BookService {
         return this.bookRepository.findAllByUserId(id);
     }
 
+    @Transactional
+    public void makeBookFree(Long id){
+        Book book = this.findById(id);
+        book.setInUseBy(null);
+        book.setIsInUse(false);
+        book.setUser(null);
+    }
+
     public void updateBook(Order order) {
         Book book = Book.builder()
                 .id(order.getBookId())
