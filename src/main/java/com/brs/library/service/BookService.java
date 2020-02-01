@@ -75,12 +75,6 @@ public class BookService {
         }
     }
 
-    @Transactional
-    void updateBookAsNew(Book book) {
-        if (!this.findById(book.getId()).getIsInUse())
-            this.bookRepository.save(book);
-    }
-
     public List<Book> findAllWhereNameLikeAndIsInUseEquals(String name, Boolean isInUse) {
         String pattern = "%" + name + "%";
         if (name == null) {

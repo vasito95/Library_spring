@@ -33,6 +33,7 @@
                         </a>
                         <div class="dropdown-menu profile-dropdown-menu">
                             <a class="dropdown-item"
+                               href="/admin"
                                th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
                                th:inline="text"
                             > <i class="fa fa-gear icon"></i>[[#{system.menu.admin}]]</a>

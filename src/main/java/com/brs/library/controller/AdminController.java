@@ -96,7 +96,7 @@ public class AdminController {
     }
     @GetMapping("/edit-books")
     public String getEditBooks(Model model){
-        model.addAttribute("books",this.bookService.findAllByIsInUse(false));
+        model.addAttribute("books", this.bookService.findAllByIsInUse(false));
         return "editbooks";
     }
 }
