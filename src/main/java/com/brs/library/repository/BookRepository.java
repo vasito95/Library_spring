@@ -14,17 +14,21 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
+
+    boolean existsById(Long id);
+
+    boolean existsByIdAndIsInUseEquals(Long id, Boolean isInUse);
+
     Optional<Book> findById(Long aLong);
 
     @Override
     List<Book> findAll();
 
-    @Override
-    void deleteById(Long aLong);
-
     Optional<Book> findBookByName(String name);
 
     List<Book> findAllByUserId(Long id);
+
+    List<Book> findAllByIsInUse(Boolean isInUse);
 
     @Modifying
     @Query(value = "UPDATE Book b set b.isInUse=?1 , b.inUseBy=?2 where b.id=?3")
@@ -33,8 +37,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1 AND b.isInUse=?2")
     List<Book> findAllWhereNameLikeAndIsInUseEquals(String n, Boolean isFree);
 
-
     @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1")
     List<Book> findAllWhereNameLike(String n);
+
+    @Override
+    void deleteById(Long aLong);
 
 }

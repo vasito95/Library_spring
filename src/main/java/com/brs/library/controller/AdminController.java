@@ -94,4 +94,9 @@ public class AdminController {
         this.orderService.deleteOrderById(orderId);
         return "redirect:orders";
     }
+    @GetMapping("/edit-books")
+    public String getEditBooks(Model model){
+        model.addAttribute("books",this.bookService.findAllByIsInUse(false));
+        return "editbooks";
+    }
 }

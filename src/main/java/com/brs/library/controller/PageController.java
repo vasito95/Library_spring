@@ -14,6 +14,7 @@ public class PageController {
     @GetMapping
     public String main(Model model) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
+
         model.addAttribute("name", name);
         return "index";
     }

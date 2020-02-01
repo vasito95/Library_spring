@@ -15,7 +15,8 @@
 
 <div class="main-wrapper">
     <div class="app">
-        <header class="header">
+        <div th:include="fragments/header.html"></div>
+      <!--  <header class="header">
             <div class="header-block header-block-search">
 
             </div>
@@ -29,9 +30,7 @@
                     </li>
                     <li id="dropdown" class="profile dropdown">
                         <a class="nav-link dropdown-toggle" role="button">
-                              <span class="name" th:if="${name} != null"
-                                    th:text="#{system.label.welcome}+' '+ ${name}">
-                              </span>
+                            <i class="fa fa-cog icon"></i>
                         </a>
                         <div class="dropdown-menu profile-dropdown-menu">
                             <a class="dropdown-item"
@@ -40,14 +39,16 @@
                             > <i class="fa fa-gear icon"></i>[[#{system.menu.admin}]]</a>
                             <div class="dropdown-divider"></div>
                             <form action="/logout" method="post">
-                                <button class="dropdown-item" id="button" type="submit" th:inline="text"><i class="fa fa-sign-out icon"></i>[[#{system.button.logout}]]</button>
+                                <button class="dropdown-item" id="button" type="submit" th:inline="text"><i
+                                        class="fa fa-sign-out icon"></i>[[#{system.button.logout}]]
+                                </button>
                                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             </form>
                         </div>
                     </li>
                 </ul>
             </div>
-        </header>
+        </header>-->
 
         <aside class="sidebar">
             <div class="sidebar-container">
@@ -77,7 +78,10 @@
                             <a href="/admin/library" th:inline="text"> <i class="fa fa-building-o"> </i>[[#{system.menu.library}]]</a>
                         </li>
                         <li>
-                            <a href="/" th:inline="text"> <i class="fa fa-building-o"> </i>[[#{system.menu.back.user}]]</a>
+                            <a href="/admin/edit-books" th:inline="text"> <i class="fa fa-pencil-square-o"> </i>[[#{system.menu.edit}]]</a>
+                        </li>
+                        <li>
+                            <a href="/" th:inline="text"> <i class="fa fa-sign-out"> </i>[[#{system.menu.back.user}]]</a>
                         </li>
                     </ul>
                 </nav>

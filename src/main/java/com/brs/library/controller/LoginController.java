@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @RequestMapping("/login")
-    public String getLogin(@RequestParam(value = "error", required = false) String error, Model model){
-        if(error != null){
+    public String getLogin(@RequestParam(value = "error", required = false) String error, Model model) {
+        if (error != null) {
             model.addAttribute("message", "User do not Exist!");
         }
+
         return "login";
     }
 

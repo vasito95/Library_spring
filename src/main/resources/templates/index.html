@@ -28,19 +28,18 @@
                     </li>
                     <li id="dropdown" class="profile dropdown">
                         <a class="nav-link dropdown-toggle" role="button">
-                              <span class="name" th:if="${name} != null"
-                                    th:text="#{system.label.welcome}+' '+ ${name}">
-                              </span>
+                            <i class="fa fa-cog icon"></i>
                         </a>
                         <div class="dropdown-menu profile-dropdown-menu">
                             <a class="dropdown-item"
-                               href="/admin"
                                th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
                                th:inline="text"
                             > <i class="fa fa-gear icon"></i>[[#{system.menu.admin}]]</a>
                             <div class="dropdown-divider"></div>
                             <form action="/logout" method="post">
-                                <button class="dropdown-item" id="button" type="submit" th:inline="text"><i class="fa fa-sign-out icon"></i>[[#{system.button.logout}]]</button>
+                                <button class="dropdown-item" id="button" type="submit" th:inline="text"><i
+                                        class="fa fa-sign-out icon"></i>[[#{system.button.logout}]]
+                                </button>
                                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             </form>
                         </div>
@@ -79,7 +78,6 @@
             </div>
         </aside>
         <article class="content dashboard-page">
-
         </article>
     </div>
 </div>

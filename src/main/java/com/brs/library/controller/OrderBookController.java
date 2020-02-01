@@ -38,7 +38,6 @@ public class OrderBookController {
 
         if(!dateTo.equals("")){
             LocalDate date = LocalDate.parse(dateTo);
-            //TODO check if date is less then month
             try{
                 this.orderService.placeOrder(name, userName, date, id);
             } catch (RuntimeException e) {

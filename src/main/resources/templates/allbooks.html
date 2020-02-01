@@ -12,7 +12,6 @@
     <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
-
 <div class="main-wrapper">
     <div class="app">
         <header class="header">
@@ -29,13 +28,10 @@
                     </li>
                     <li id="dropdown" class="profile dropdown">
                         <a class="nav-link dropdown-toggle" role="button">
-                              <span class="name" th:if="${name} != null"
-                                    th:text="#{system.label.welcome}+' '+ ${name}">
-                              </span>
+                            <i class="fa fa-cog icon"></i>
                         </a>
                         <div class="dropdown-menu profile-dropdown-menu">
                             <a class="dropdown-item"
-                               href="/admin"
                                th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
                                th:inline="text"
                             > <i class="fa fa-gear icon"></i>[[#{system.menu.admin}]]</a>
@@ -51,6 +47,7 @@
                 </ul>
             </div>
         </header>
+
         <aside class="sidebar">
             <div class="sidebar-container">
                 <div class="sidebar-header">
@@ -82,7 +79,6 @@
                 </nav>
             </div>
         </aside>
-
         <article class="content dashboard-page">
             <form method="get" action="/all-books">
                 <input class="form-control" type="text" name="filter" th:placeholder="#{system.button.filter}">

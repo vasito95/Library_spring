@@ -3,6 +3,7 @@ package com.brs.library.service;
 
 import com.brs.library.entity.Book;
 import com.brs.library.entity.Order;
+import com.brs.library.entity.User;
 import com.brs.library.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,16 @@ public class BookService {
     public BookService(BookRepository bookRepository, UserService userService) {
         this.bookRepository = bookRepository;
         this.userService = userService;
+    }
+
+    @Transactional
+    public void editBook(Book editedBook) {
+        if(this.bookRepository.existsById(editedBook.getId())) {
+            Book book = this.bookRepository.getOne(editedBook.getId());
+            book.setAttributes(editedBook.getAttributes());
+            book.setAuthors(editedBook.getAuthors());
+            book.setName(editedBook.getName());
+        }
     }
 
     //TODO create exception book not found
@@ -47,22 +58,21 @@ public class BookService {
     }
 
     @Transactional
-    public void makeBookFree(Long id){
+    public void makeBookFree(Long id) {
         Book book = this.findById(id);
         book.setInUseBy(null);
         book.setIsInUse(false);
         book.setUser(null);
     }
 
+    @Transactional
     public void updateBook(Order order) {
-        Book book = Book.builder()
-                .id(order.getBookId())
-                .inUseBy(order.getDateTo())
-                .user(userService.getUserById(order.getUsrId()))
-                .isInUse(true)
-                .name(order.getBookName())
-                .build();
-        this.updateBookAsNew(book);
+        if(this.bookRepository.existsByIdAndIsInUseEquals(order.getBookId(),false)) {
+            Book book = this.bookRepository.getOne(order.getBookId());
+            book.setIsInUse(true);
+            book.setInUseBy(order.getDateTo());
+            book.setUser(User.builder().id(order.getUsrId()).build());
+        }
     }
 
     @Transactional
@@ -75,10 +85,14 @@ public class BookService {
         String pattern = "%" + name + "%";
         if (name == null) {
             return (isInUse)
-                    ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals("", !isInUse)
+                    ? this.bookRepository.findAllByIsInUse(false)
                     : this.bookRepository.findAll();
         }
-        return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, !isInUse)
+        return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, false)
                 : this.bookRepository.findAllWhereNameLike(pattern);
+    }
+
+    public List<Book> findAllByIsInUse(Boolean isInUse){
+      return  this.bookRepository.findAllByIsInUse(isInUse);
     }
 }

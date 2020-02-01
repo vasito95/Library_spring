@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Library</title>
     <meta charset="UTF-8">
@@ -86,27 +86,18 @@
                 </nav>
             </div>
         </aside>
+
         <article class="content dashboard-page">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Date to</th>
-                    <th scope="col">User name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="book : ${books}">
-                    <div th:if="${book.user} != null">
-                        <td th:text="${book.id}"></td>
-                        <td th:text="${book.name}"></td>
-                        <td th:text="${book.inUseBy}"></td>
-                        <td th:if="${book.user} != null" th:text="${book.user.getUsername()}"></td>
-                    </div>
-                </tr>
-                </tbody>
-            </table>
+            <form action="edit-book/accept-edit" method="post">
+                <input type="hidden" name="id" th:value="${book.id}">
+                <input class="form-control" type="text" name="name" placeholder="Input book name" th:value="${book.name}">
+                <h3>Authors</h3>
+                <input class="form-control" type="text" name="author" th:each="author : ${book.authors}" th:value="${author}">
+                <h3>Attributes</h3>
+                <input class="form-control" type="text" name="attribute" th:each="attribute : ${book.attributes}" th:value="${attribute}">
+                <input type="submit" value="Confirm Edit"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </form>
         </article>
     </div>
 </div>

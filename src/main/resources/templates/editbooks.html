@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Library</title>
     <meta charset="UTF-8">
@@ -86,24 +86,36 @@
                 </nav>
             </div>
         </aside>
+
         <article class="content dashboard-page">
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Book Name</th>
-                    <th scope="col">Date to</th>
-                    <th scope="col">User name</th>
+                    <th scope="col">Authors</th>
+                    <th scope="col">Attributes</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="book : ${books}">
-                    <div th:if="${book.user} != null">
-                        <td th:text="${book.id}"></td>
-                        <td th:text="${book.name}"></td>
-                        <td th:text="${book.inUseBy}"></td>
-                        <td th:if="${book.user} != null" th:text="${book.user.getUsername()}"></td>
-                    </div>
+                    <td th:text="${book.id}"></td>
+                    <td th:text="${book.name}"></td>
+                    <td th:text="${book.authors}"></td>
+                    <td th:text="${book.attributes}"></td>
+                    <td>
+                        <form th:action="/edit-book/${book.id}"  method="post">
+                            <input type="hidden" th:value="${book.id}" name="bookId">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <input type="submit" class="btn btn-outline-success m-1 " value="Edit">
+                        </form>
+                        <form action="/edit-book/delete" method="post">
+                            <input type="hidden" th:value="${book.id}" name="bookId">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <input type="submit" class="btn btn-outline-danger m-1" value="Delete">
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>
