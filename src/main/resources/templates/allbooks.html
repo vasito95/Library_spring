@@ -48,11 +48,15 @@
                 </nav>
             </div>
         </aside>
-        <article class="content dashboard-page">
+
+        <article class="content dashboard-page center-block">
             <form method="get" action="/all-books">
-                <input class="form-control" type="text" name="filter" th:placeholder="#{system.button.filter}">
-                <label for="isFree" th:text="#{system.filter.free.only}"></label>
-                <input id="isFree" type="checkbox" name="isFree">
+                <input class="form-control-sm" type="text" name="filter" th:placeholder="#{system.button.filter}">
+                <select class="form-control-sm" name="field">
+                    <option value="name">Name</option>
+                    <option value="author">Author</option>
+                    <option value="attribute">Attriubute</option>
+                </select>
                 <button class="button" type="submit" th:text="#{system.button.filter}"></button>
             </form>
 
@@ -64,6 +68,7 @@
                     <th scope="col">Book Name</th>
                     <th scope="col">Authors</th>
                     <th scope="col">Attributes</th>
+                    <th scope="col">Is free</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -71,7 +76,8 @@
                     <td th:text="${book.id}"></td>
                     <td th:text="${book.name}"></td>
                     <td th:text="${book.authors}"></td>
-                    <td th:text="${book.attributes}"></td>
+                    <td th:text="${book.attribute}"></td>
+                    <td th:text="${book.isInUse}"></td>
                 </tr>
                 </tbody>
             </table>

@@ -25,17 +25,14 @@ public class Book {
     private Long id;
     private LocalDate inUseBy;
     private Boolean isInUse;
+    @Column(unique = true, nullable = false)
     private String name;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name="author", joinColumns = @JoinColumn(name = "book_id"))
+    @CollectionTable(name="author", joinColumns = @JoinColumn(name = "book_id") )
     private List<String> authors;
 
-    //TODO checkout
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name="attribute", joinColumns = @JoinColumn(name = "book_id"))
-    private List<String> attributes;
+    private String attribute;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;

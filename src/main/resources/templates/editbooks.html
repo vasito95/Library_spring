@@ -71,7 +71,7 @@
                     <td th:text="${book.id}"></td>
                     <td th:text="${book.name}"></td>
                     <td th:text="${book.authors}"></td>
-                    <td th:text="${book.attributes}"></td>
+                    <td th:text="${book.attribute}"></td>
                     <td>
                         <form action="/edit-book"  method="post">
                             <input type="hidden" th:value="${book.id}" name="bookId">

@@ -4,7 +4,10 @@ package com.brs.library.service;
 import com.brs.library.entity.Book;
 import com.brs.library.entity.Order;
 import com.brs.library.entity.User;
+import com.brs.library.exceptions.BookNotFoundException;
 import com.brs.library.repository.BookRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,48 +28,43 @@ public class BookService {
     public void editBook(Book editedBook) {
         if(this.bookRepository.existsById(editedBook.getId())) {
             Book book = this.bookRepository.getOne(editedBook.getId());
-            book.setAttributes(editedBook.getAttributes());
+            book.setAttribute(editedBook.getAttribute());
             book.setAuthors(editedBook.getAuthors());
             book.setName(editedBook.getName());
         }
-    }
-
-    //TODO create exception book not found
-    public Book findById(Long id) {
-        return this.bookRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public void saveNewBook(Book b) {
         this.bookRepository.save(b);
     }
 
-    public List<Book> findAll() {
-        return this.bookRepository.findAll();
-    }
-
-    //TODO create own exception
-    public Book findByName(String name) throws RuntimeException {
-        return this.bookRepository.findBookByName(name).orElseThrow(RuntimeException::new);
-    }
-
+    @Transactional
     public void deleteById(Long id) {
-        this.bookRepository.deleteById(id);
-    }
-
-    public List<Book> findAllByUserId(Long id) {
-        return this.bookRepository.findAllByUserId(id);
+        if(this.bookRepository.existsByIdAndIsInUseEquals(id,false)) {
+            bookRepository.deleteById(id);
+        }
     }
 
     @Transactional
     public void makeBookFree(Long id) {
-        Book book = this.findById(id);
-        book.setInUseBy(null);
-        book.setIsInUse(false);
-        book.setUser(null);
+        if(bookRepository.existsById(id)){
+            Book book = bookRepository.getOne(id);
+            book.setInUseBy(null);
+            book.setIsInUse(false);
+            book.setUser(null);
+        }
+    }
+
+    public List<Book> findAll() {
+        return this.bookRepository.findAll();
+    }
+
+    public Book findById(Long id) throws BookNotFoundException {
+        return this.bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
     }
 
     @Transactional
-    public void updateBook(Order order) {
+    public void assignBook(Order order) {
         if(this.bookRepository.existsByIdAndIsInUseEquals(order.getBookId(),false)) {
             Book book = this.bookRepository.getOne(order.getBookId());
             book.setIsInUse(true);
@@ -75,18 +73,26 @@ public class BookService {
         }
     }
 
-    public List<Book> findAllWhereNameLikeAndIsInUseEquals(String name, Boolean isInUse) {
-        String pattern = "%" + name + "%";
-        if (name == null) {
-            return (isInUse)
-                    ? this.bookRepository.findAllByIsInUse(false)
-                    : this.bookRepository.findAll();
-        }
-        return isInUse ? this.bookRepository.findAllWhereNameLikeAndIsInUseEquals(pattern, false)
-                : this.bookRepository.findAllWhereNameLike(pattern);
+    public List<Book> findAllByAuthorsContains(String author){
+        return this.bookRepository.findAllByAuthorsEquals(author);
+    }
+    public List<Book> findAllByNameLike(String name){
+        return this.bookRepository.findAllByNameLike("%"+name+"%");
     }
 
-    public List<Book> findAllByIsInUse(Boolean isInUse){
-      return  this.bookRepository.findAllByIsInUse(isInUse);
+    public List<Book> findAllByAttributeLike(String attribute){
+        return this.bookRepository.findAllByAttributeLike("%"+attribute+"%");
+    }
+
+    public Book findByName(String name) throws BookNotFoundException {
+        return this.bookRepository.findBookByName(name).orElseThrow(BookNotFoundException::new);
+    }
+
+    public Page<Book> findAllByUserId(Long id, Pageable pageable) {
+        return this.bookRepository.findAllByUserId(id, pageable);
+    }
+
+    public Page<Book> findAllByIsInUse(Boolean isInUse, Pageable pageable){
+      return  this.bookRepository.findAllByIsInUse(isInUse, pageable);
     }
 }

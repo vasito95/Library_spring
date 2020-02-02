@@ -5,6 +5,7 @@ import com.brs.library.entity.Order;
 import com.brs.library.service.BookService;
 import com.brs.library.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,17 +61,17 @@ public class AdminController {
     @PostMapping("/add-book")
     public String addNewBook(@RequestParam("name") String name,
                              @RequestParam("author") List<String> authors,
-                             @RequestParam("attribute") List<String> attributes) {
-        log.warn(authors.toString());
-        log.warn(attributes.toString());
-        Book newBook = Book.builder()
-                .isInUse(false)
-                .name(name)
-                .attributes(attributes)
-                .authors(authors)
-                .build();
-        this.bookService.saveNewBook(newBook);
-        return "redirect:add-book";
+                             @RequestParam("attribute") String attribute) {
+
+            Book newBook = Book.builder()
+                    .isInUse(false)
+                    .name(name)
+                    .attribute(attribute)
+                    .authors(authors)
+                    .build();
+            this.bookService.saveNewBook(newBook);
+
+        return "addbook";
     }
 
     @PostMapping("/edit-book")
@@ -80,7 +81,7 @@ public class AdminController {
                 .name(name)
                 .build();
         this.bookService.saveNewBook(newBook);
-        return "admin";
+        return "redirect:edit-books";
     }
 
     @PostMapping("/accept-order")
@@ -95,8 +96,8 @@ public class AdminController {
         return "redirect:orders";
     }
     @GetMapping("/edit-books")
-    public String getEditBooks(Model model){
-        model.addAttribute("books", this.bookService.findAllByIsInUse(false));
+    public String getEditBooks(Model model, Pageable pageable){
+        model.addAttribute("books", this.bookService.findAllByIsInUse(false , pageable));
         return "editbooks";
     }
 }

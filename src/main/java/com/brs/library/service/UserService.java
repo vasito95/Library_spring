@@ -1,8 +1,8 @@
 package com.brs.library.service;
 
 import com.brs.library.entity.User;
+import com.brs.library.exceptions.EmailIsNotUniqueException;
 import com.brs.library.exceptions.UserNotFoundException;
-import com.brs.library.exceptions.UsernameIsNotUniqueException;
 import com.brs.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,11 +31,11 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(RuntimeException::new);
     }
 
-    public void saveNewUser(User user) throws UsernameIsNotUniqueException {
+    public void saveNewUser(User user) throws EmailIsNotUniqueException {
         try{
             this.userRepository.save(user);
         } catch (Exception e){
-            throw new UsernameIsNotUniqueException(e.getMessage());
+            throw new EmailIsNotUniqueException(e.getMessage());
         }
     }
 

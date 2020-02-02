@@ -1,7 +1,8 @@
 package com.brs.library.repository;
 
 import com.brs.library.entity.Book;
-import lombok.NonNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,24 +22,23 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Optional<Book> findById(Long aLong);
 
+    List<Book> findAllByAuthorsEquals(String author);
+
+    List<Book> findAllByNameLike(String name);
+
+    List<Book> findAllByAttributeLike(String attribute);
+
     @Override
-    List<Book> findAll();
+    Page<Book> findAll(Pageable pageable);
 
     Optional<Book> findBookByName(String name);
 
-    List<Book> findAllByUserId(Long id);
-
-    List<Book> findAllByIsInUse(Boolean isInUse);
-
-    @Modifying
-    @Query(value = "UPDATE Book b set b.isInUse=?1 , b.inUseBy=?2 where b.id=?3")
-    void updateBookInUseByAndIsInUse(Boolean isInUser, LocalDate dateBy, Long bookId);
+    Page<Book> findAllByUserId(Long id, Pageable pageable);
+    //TODO remove !
+    Page<Book> findAllByIsInUse(Boolean isInUse, Pageable pageable);
 
     @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1 AND b.isInUse=?2")
-    List<Book> findAllWhereNameLikeAndIsInUseEquals(String n, Boolean isFree);
-
-    @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1")
-    List<Book> findAllWhereNameLike(String n);
+    Page<Book> findAllWhereNameLikeAndIsInUseEquals(String n, Boolean isFree, Pageable pageable);
 
     @Override
     void deleteById(Long aLong);

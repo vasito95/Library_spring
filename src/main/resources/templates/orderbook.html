@@ -56,7 +56,7 @@
 
             <div class="center-block">
                 <form action="/order-book" method="POST">
-                    <input class="form-control" type="text" name="name" placeholder="Input Name"/>
+                    <input class="form-control-sm" type="text" name="name" placeholder="Input Name"/>
                     <label for="dateTo">Date from today to:</label>
                     <input id="dateTo" type="date" th:min="${minDate}" th:max="${maxDate}" name="dateTo">
                     <input type="submit" class="btn btn-success" value="Place Order">

@@ -1,10 +1,10 @@
 package com.brs.library.service;
 
-import com.brs.library.dto.OrderDTO;
 import com.brs.library.entity.Book;
 import com.brs.library.entity.Order;
+import com.brs.library.exceptions.BookAlreadyTakenException;
+import com.brs.library.exceptions.BookNotFoundException;
 import com.brs.library.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,10 +20,10 @@ public class OrderService {
         this.bookService = bookService;
     }
 
-    public void placeOrder(String bookName, String userName, LocalDate dateTo, Long userId) {
+    public void placeOrder(String bookName, String userName, LocalDate dateTo, Long userId) throws BookNotFoundException, BookAlreadyTakenException {
         Book book = this.bookService.findByName(bookName);
-        if (book == null){
-            return;
+        if(book.getIsInUse()){
+            throw new BookAlreadyTakenException();
         }
         Order order = Order.builder()
                 .usrId(userId)
@@ -45,7 +45,7 @@ public class OrderService {
 
     public void acceptOrder(Long orderId){
         Order order = orderRepository.getOne(orderId);
-        this.bookService.updateBook(order);
+        this.bookService.assignBook(order);
         this.deleteOrderById(orderId);
     }
 

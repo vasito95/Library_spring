@@ -97,8 +97,6 @@
                 <input class="form-control" type="text" name="author" placeholder="Input author">
                 <h3>Attributes</h3>
                 <input class="form-control" type="text" name="attribute" placeholder="Input attribute">
-                <input class="form-control" type="text" name="attribute" placeholder="Input attribute">
-                <input class="form-control" type="text" name="attribute" placeholder="Input attribute">
                 <input type="submit" value="Add"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
@@ -116,7 +114,7 @@
                     <td th:text="${book.id}"></td>
                     <td th:text="${book.name}"></td>
                     <td th:text="${book.authors}"></td>
-                    <td th:text="${book.attributes}"></td>
+                    <td th:text="${book.attribute}"></td>
                 </tr>
                 </tbody>
             </table>

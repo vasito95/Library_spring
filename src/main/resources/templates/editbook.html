@@ -62,7 +62,7 @@
                 <h3>Authors</h3>
                 <input class="form-control" type="text" name="author" th:each="author : ${book.authors}" th:value="${author}">
                 <h3>Attributes</h3>
-                <input class="form-control" type="text" name="attribute" th:each="attribute : ${book.attributes}" th:value="${attribute}">
+                <input class="form-control" type="text" name="attribute" th:value="${book.attribute}">
                 <input type="submit" value="Confirm Edit"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>

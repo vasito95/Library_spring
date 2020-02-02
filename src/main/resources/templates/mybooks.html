@@ -55,13 +55,13 @@
                 <thead>
                 <tr>
                     <th th:text="#{system.book.name}"></th>
-                    <th th:text="#{system.book.isinuse}"></th>
+                    <th th:text="#{system.book.inuseby}"></th>
                     <th th:text="#{system.book.return}"></th>
                 </tr>
                 </thead>
-                <tr th:each="book : ${books}">
+                <tr th:each="book : ${page.getContent()}">
                     <td th:text="${book.name}"></td>
-                    <td th:text="${book.isInUse}"></td>
+                    <td th:text="${book.inUseBy}"></td>
                     <td>
                         <form action="/my-books" method="post">
                             <input type="hidden" th:value="${book.id}" name="bookId">
@@ -71,6 +71,58 @@
                     </td>
                 </tr>
             </table>
+            <nav aria-label="Pagination" th:if="${page.totalPages gt 1}">
+                <ul class="pagination justify-content-center font-weight-bold">
+                    <li class="page-item" th:classappend="${!page.hasPrevious()} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/my-books?page={id}&size={siz}(id=${page.number lt 1 ? 0 : page.number-1},siz=${page.size})}"
+                           aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${i eq (page.number+1)} ? 'active'"
+                        th:each="i : ${#numbers.sequence( 1, page.totalPages, 1)}">
+                        <a class="page-link" th:href="@{/my-books?page={id}&size={siz}(id=${i-1},siz=${page.size})}"
+                           th:text="${i}"
+                           th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${(page.number + 1) eq page.totalPages} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/my-books?page={id}&size={siz}(id=${page.number gt page.totalPages-2 ? page.number : page.number+1},siz=${page.size})}"
+                           aria-label="Next" title="Next Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <nav th:if="${page.totalPages gt 1}" aria-label="Pagination">
+                <h4 th:text="#{system.allbooks.items.per.page}"></h4>
+                <ul class="pagination justify-content-center font-weight-bold">
+
+                    <li class="page-item">
+                        <a class="page-link"
+                           th:href="@{/my-books?size=5}"
+                           data-toggle="tooltip">
+                            5
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link"
+                           th:href="@{/my-books?size=8}"
+                           data-toggle="tooltip">
+                            8
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link"
+                           th:href="@{/my-books?size=10}"
+                           data-toggle="tooltip">
+                            10
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
         </article>
     </div>
 </div>

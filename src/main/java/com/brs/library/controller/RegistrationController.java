@@ -2,7 +2,7 @@ package com.brs.library.controller;
 
 import com.brs.library.entity.Role;
 import com.brs.library.entity.User;
-import com.brs.library.exceptions.UsernameIsNotUniqueException;
+import com.brs.library.exceptions.EmailIsNotUniqueException;
 import com.brs.library.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -41,8 +41,8 @@ public class RegistrationController {
         user.setIsActive(true);
         try{
             userService.saveNewUser(user);
-        } catch (UsernameIsNotUniqueException e) {
-            model.addAttribute("message", "Username is not unique");
+        } catch (EmailIsNotUniqueException e) {
+            model.addAttribute("message", "registration.email.not.unique");
             return "registration";
         }
         return "redirect:/login";

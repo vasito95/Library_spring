@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -24,10 +25,28 @@ public class AllBooksController {
     }
 
     @GetMapping
-    public String getFiltered(@RequestParam(value = "filter", required = false) String filter, @RequestParam(value = "isFree", required = false) Boolean isFree, Model model){
-        log.info(filter+"");
-        log.info((isFree==Boolean.TRUE) + "");
-        List<Book> books = this.bookService.findAllWhereNameLikeAndIsInUseEquals(filter, isFree==Boolean.TRUE);
+    public String getFiltered(@RequestParam(value = "filter", required = false) String filter,
+                              @RequestParam(value = "field", required = false) String field,
+                              Model model){
+        List<Book> books = Collections.EMPTY_LIST;
+        if(field!= null){
+            switch (field){
+                case "author" :
+                    books = bookService.findAllByAuthorsContains(filter);
+                    break;
+                case "name" :
+                    books = bookService.findAllByNameLike(filter);
+                    break;
+                case "attribute":
+                    books = bookService.findAllByAttributeLike(filter);
+                    break;
+                default:
+                    books = bookService.findAll();
+                    break;
+            }
+        } else {
+            books = bookService.findAll();
+        }
         model.addAttribute("books", books);
         return "allbooks";
     }

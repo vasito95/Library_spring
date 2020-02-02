@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Library</title>
     <meta charset="UTF-8">
-    <title>Error</title>
+
+    <link th:href="@{/css/theme.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Oooops....something went wrong</h1>
+<div class="auth">
+    <div class="auth-container center-block text-danger">
+        <h1 th:text="#{error.message}"></h1>
+        <a href="/" th:text="#{error.return}"></a>
+    </div>
+</div>
 </body>
 </html>

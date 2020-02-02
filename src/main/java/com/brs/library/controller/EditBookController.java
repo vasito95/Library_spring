@@ -1,15 +1,17 @@
 package com.brs.library.controller;
 
 import com.brs.library.entity.Book;
+import com.brs.library.exceptions.BookNotFoundException;
 import com.brs.library.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Locale;
 
 
 @Slf4j
@@ -25,10 +27,15 @@ public class EditBookController {
         this.bookService = bookService;
     }
 
-    @PostMapping("{bookId}")
-    public String loadBookEdit(@PathVariable(name = "bookId") Long bookId, Model model) {
-        Book book = bookService.findById(bookId);
-        model.addAttribute("book",book);
+    @PostMapping
+    public String loadBookEdit(@RequestParam(name = "bookId") Long bookId, Model model) {
+        Book book;
+        try{
+            book = bookService.findById(bookId);
+            model.addAttribute("book", book);
+        } catch (BookNotFoundException e) {
+            return "redirect:edit-books";
+        }
         return "editbook";
     }
 
@@ -36,11 +43,11 @@ public class EditBookController {
     public String acceptEdit(@RequestParam("id") Long id,
                              @RequestParam("name") String name,
                              @RequestParam("author") List<String> authors,
-                             @RequestParam("attribute") List<String> attributes, Model model){
+                             @RequestParam("attribute") String attribute, Model model){
         Book editedBook= Book.builder()
                 .id(id)
                 .name(name)
-                .attributes(attributes)
+                .attribute(attribute)
                 .authors(authors)
                 .build();
         this.bookService.editBook(editedBook);
