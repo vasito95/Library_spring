@@ -17,7 +17,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long usrId;
+    private Long userId;
     private Long bookId;
     private String userName;
     private String bookName;

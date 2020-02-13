@@ -34,6 +34,7 @@ public class BookService {
         }
     }
 
+    //TODO catch exception not unique book name
     public void saveNewBook(Book b) {
         this.bookRepository.save(b);
     }
@@ -69,7 +70,7 @@ public class BookService {
             Book book = this.bookRepository.getOne(order.getBookId());
             book.setIsInUse(true);
             book.setInUseBy(order.getDateTo());
-            book.setUser(User.builder().id(order.getUsrId()).build());
+            book.setUser(User.builder().id(order.getUserId()).build());
         }
     }
 

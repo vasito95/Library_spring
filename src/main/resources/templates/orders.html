@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Library</title>
     <meta charset="UTF-8">
@@ -72,12 +72,12 @@
                     <td th:text="${order.userName}"></td>
                     <td th:text="${order.dateTo}"></td>
                     <td>
-                        <form action="/admin/accept-order" method="post">
+                        <form action="/admin/orders/accept-order" method="post">
                             <input type="hidden" th:value="${order.id}" name="orderId">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             <input type="submit" class="btn btn-outline-success m-1 " value="Accept">
                         </form>
-                        <form action="/admin/decline-order" method="post">
+                        <form action="/admin/orders/decline-order" method="post">
                             <input type="hidden" th:value="${order.id}" name="orderId">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             <input type="submit" class="btn btn-outline-danger m-1" value="Decline">

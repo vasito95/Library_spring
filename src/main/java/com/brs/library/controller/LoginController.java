@@ -13,9 +13,6 @@ public class LoginController {
         if (error != null) {
             model.addAttribute("message", "User do not Exist!");
         }
-
         return "login";
     }
-
-
 }

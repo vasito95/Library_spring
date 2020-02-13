@@ -1,11 +1,12 @@
 package com.brs.library.controller;
 
+import com.brs.library.config.GlobalVariables;
 import com.brs.library.entity.User;
 import com.brs.library.exceptions.BookAlreadyTakenException;
 import com.brs.library.exceptions.BookNotFoundException;
 import com.brs.library.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,25 +33,22 @@ public class OrderBookController {
     }
 
     @PostMapping("/order-book")
-    public String placeOrder(String name, String dateTo, Model model) {
-        Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        String userName = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-
-        if(!dateTo.equals("")){
+    public String placeOrder(String name, String dateTo, Model model, @AuthenticationPrincipal User user) {
+        //TODO change string to property key
+        if(dateTo.equals("")){
+            model.addAttribute("message", "Date is not correct");
+        } else {
             LocalDate date = LocalDate.parse(dateTo);
             try{
-                this.orderService.placeOrder(name, userName, date, id);
-            } catch (BookNotFoundException enotfound) {
+                this.orderService.placeOrder(name, user.getUsername(), date, user.getId());
+            } catch (BookNotFoundException notfound) {
                 model.addAttribute("message", "Book not found");
-            } catch (BookAlreadyTakenException booktaken){
+            } catch (BookAlreadyTakenException bookTaken){
                 model.addAttribute("message", "Books is already taken");
             }
-        } else {
-            model.addAttribute("message", "Date is not correct");
         }
-        log.warn(dateTo);
-        log.warn(name);
-        log.warn(id.toString());
+        model.addAttribute("minDate", LocalDate.now());
+        model.addAttribute("maxDate", LocalDate.now().plusDays(GlobalVariables.DAYS_TO_ADD));
         return "orderbook";
     }
 }

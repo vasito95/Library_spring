@@ -26,7 +26,7 @@ public class OrderService {
             throw new BookAlreadyTakenException();
         }
         Order order = Order.builder()
-                .usrId(userId)
+                .userId(userId)
                 .dateTo(dateTo)
                 .bookId(book.getId())
                 .bookName(bookName)

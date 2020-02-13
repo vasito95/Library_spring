@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +29,11 @@ public class MyBooksController {
     }
 
     @GetMapping
-    public String getMyBoooks(Model model, @PageableDefault(sort = {"inUseBy"},direction = Sort.Direction.ASC) Pageable pageable){
-        Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        Page<Book> page = this.bookService.findAllByUserId(id, pageable);
+    public String getMyBoooks(Model model, @PageableDefault(sort = {"inUseBy"},direction = Sort.Direction.ASC) Pageable pageable, @AuthenticationPrincipal User user){
+
+        Page<Book> page = this.bookService.findAllByUserId(user.getId(), pageable);
         if(page.isEmpty()){
-            page = this.bookService.findAllByUserId(id, pageable.first());
+            page = this.bookService.findAllByUserId(user.getId(), pageable.first());
         }
         model.addAttribute("page", page);
         return "mybooks";
