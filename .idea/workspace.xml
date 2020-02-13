@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dbecc323-12fa-4ada-a221-5c7eb10f4db5" name="Default Changelist" comment="Review">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/config/GlobalVariables.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AddBookController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/OrdersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="dbecc323-12fa-4ada-a221-5c7eb10f4db5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/EditBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/EditBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/MyBooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/MyBooksController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/OrderBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/controller/OrderBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/brs/library/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/brs/library/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/allbooks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/allbooks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/orders.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,6 +362,10 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="392" y="92" key="#Assign_Data_Sources/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1578839041842" />
+    <state x="392" y="92" key="#Notifications" timestamp="1581591634879">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state x="392" y="92" key="#Notifications/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1581591634879" />
     <state x="392" y="92" key="#Project_Structure" timestamp="1578838073906">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
@@ -522,13 +513,14 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="437" y="48" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579642519234" />
-    <state x="493" y="30" width="740" height="804" key="find.popup" timestamp="1579461684243">
+    <state x="493" y="30" width="740" height="804" key="find.popup" timestamp="1581591420372">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state x="493" y="30" width="740" height="804" key="find.popup/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1579461684243" />
-    <state x="600" y="225" key="git4idea.merge.GitMergeDialog" timestamp="1580751914547">
+    <state x="493" y="30" width="740" height="804" key="find.popup/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1581591420372" />
+    <state x="600" y="225" key="git4idea.merge.GitMergeDialog" timestamp="1581591619567">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
+    <state x="600" y="225" key="git4idea.merge.GitMergeDialog/62.0.1474.864/1920.69.1522.900@62.0.1474.864" timestamp="1581591619567" />
     <state x="600" y="225" key="git4idea.merge.GitMergeDialog/62.0.1474.864@62.0.1474.864" timestamp="1580751914547" />
     <state x="240" y="129" key="new project wizard" timestamp="1579683572178">
       <screen x="62" y="0" width="1474" height="864" />
