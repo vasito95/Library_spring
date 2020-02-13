@@ -16,7 +16,7 @@ import java.util.Locale;
 public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/login").setViewName("login.html");
     }
     @Bean
     public LocaleResolver localeResolver(){

@@ -1,0 +1,15 @@
+body{
+    display: flex;
+}
+.container{
+    justify-content: center;
+    align-content: center;
+}
+a{
+    text-decoration: none;
+    color: black;
+    size: 16px;
+}
+a:hover{
+    color:red;
+}
