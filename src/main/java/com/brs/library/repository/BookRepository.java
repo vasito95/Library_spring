@@ -34,13 +34,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<Book> findBookByName(String name);
 
     Page<Book> findAllByUserId(Long id, Pageable pageable);
-    //TODO remove !
-    Page<Book> findAllByIsInUse(Boolean isInUse, Pageable pageable);
 
-    @Query(value = "SELECT b FROM Book b WHERE b.name LIKE ?1 AND b.isInUse=?2")
-    Page<Book> findAllWhereNameLikeAndIsInUseEquals(String n, Boolean isFree, Pageable pageable);
+    Page<Book> findAllByIsInUse(Boolean isInUse, Pageable pageable);
 
     @Override
     void deleteById(Long aLong);
-
 }

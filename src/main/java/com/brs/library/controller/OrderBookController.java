@@ -34,11 +34,12 @@ public class OrderBookController {
 
     @PostMapping("/order-book")
     public String placeOrder(String name, String dateTo, Model model, @AuthenticationPrincipal User user) {
-        //TODO change string to property key
+
         if(dateTo.equals("")){
             model.addAttribute("message", "Date is not correct");
         } else {
             LocalDate date = LocalDate.parse(dateTo);
+
             try{
                 this.orderService.placeOrder(name, user.getUsername(), date, user.getId());
             } catch (BookNotFoundException notfound) {

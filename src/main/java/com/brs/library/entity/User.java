@@ -17,8 +17,6 @@ import java.util.Set;
 @Getter
 @Setter
 
-
-
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -28,20 +26,15 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "form.invalid.username.blank")
-    @Size(min=5, max = 13, message ="form.invalid.username.length" )
     private String username;
 
     @Column(unique = true, nullable = false)
-    @Email(regexp = "^[a-zA-Z0-9.]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
-    message = "form.invalid.email")
     private String email;
-    @Column(nullable = false)
 
-    @Size(min=5, max = 13, message = "form.invalid.phone.number.length")
+    @Column(nullable = false)
     private String phoneNumber;
 
-    @Size(min=8, max=13, message = "form.invalid.password.length")
+    @Column(nullable = false)
     private String password;
 
     private Boolean isActive;

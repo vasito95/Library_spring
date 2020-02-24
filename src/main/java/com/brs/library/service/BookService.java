@@ -4,6 +4,7 @@ package com.brs.library.service;
 import com.brs.library.entity.Book;
 import com.brs.library.entity.Order;
 import com.brs.library.entity.User;
+import com.brs.library.exceptions.BookNameNotUnique;
 import com.brs.library.exceptions.BookNotFoundException;
 import com.brs.library.repository.BookRepository;
 import org.springframework.data.domain.Page;
@@ -17,38 +18,41 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
-    private final UserService userService;
 
     public BookService(BookRepository bookRepository, UserService userService) {
         this.bookRepository = bookRepository;
-        this.userService = userService;
     }
 
-    @Transactional
     public void editBook(Book editedBook) {
-        if(this.bookRepository.existsById(editedBook.getId())) {
+        if (this.bookRepository.existsById(editedBook.getId())
+                && !bookRepository.findBookByName(editedBook.getName()).isPresent()) {
             Book book = this.bookRepository.getOne(editedBook.getId());
             book.setAttribute(editedBook.getAttribute());
             book.setAuthors(editedBook.getAuthors());
             book.setName(editedBook.getName());
+            try {
+                bookRepository.save(book);
+            } catch (Exception e){
+                throw new BookNameNotUnique(e.getMessage());
+            }
         }
     }
 
-    //TODO catch exception not unique book name
+
     public void saveNewBook(Book b) {
         this.bookRepository.save(b);
     }
 
     @Transactional
     public void deleteById(Long id) {
-        if(this.bookRepository.existsByIdAndIsInUseEquals(id,false)) {
+        if (this.bookRepository.existsByIdAndIsInUseEquals(id, false)) {
             bookRepository.deleteById(id);
         }
     }
 
     @Transactional
     public void makeBookFree(Long id) {
-        if(bookRepository.existsById(id)){
+        if (bookRepository.existsById(id)) {
             Book book = bookRepository.getOne(id);
             book.setInUseBy(null);
             book.setIsInUse(false);
@@ -66,7 +70,7 @@ public class BookService {
 
     @Transactional
     public void assignBook(Order order) {
-        if(this.bookRepository.existsByIdAndIsInUseEquals(order.getBookId(),false)) {
+        if (this.bookRepository.existsByIdAndIsInUseEquals(order.getBookId(), false)) {
             Book book = this.bookRepository.getOne(order.getBookId());
             book.setIsInUse(true);
             book.setInUseBy(order.getDateTo());
@@ -74,15 +78,16 @@ public class BookService {
         }
     }
 
-    public List<Book> findAllByAuthorsContains(String author){
+    public List<Book> findAllByAuthorsContains(String author) {
         return this.bookRepository.findAllByAuthorsEquals(author);
     }
-    public List<Book> findAllByNameLike(String name){
-        return this.bookRepository.findAllByNameLike("%"+name+"%");
+
+    public List<Book> findAllByNameLike(String name) {
+        return this.bookRepository.findAllByNameLike("%" + name + "%");
     }
 
-    public List<Book> findAllByAttributeLike(String attribute){
-        return this.bookRepository.findAllByAttributeLike("%"+attribute+"%");
+    public List<Book> findAllByAttributeLike(String attribute) {
+        return this.bookRepository.findAllByAttributeLike("%" + attribute + "%");
     }
 
     public Book findByName(String name) throws BookNotFoundException {
@@ -93,7 +98,7 @@ public class BookService {
         return this.bookRepository.findAllByUserId(id, pageable);
     }
 
-    public Page<Book> findAllByIsInUse(Boolean isInUse, Pageable pageable){
-      return  this.bookRepository.findAllByIsInUse(isInUse, pageable);
+    public Page<Book> findAllByIsInUse(Boolean isInUse, Pageable pageable) {
+        return this.bookRepository.findAllByIsInUse(isInUse, pageable);
     }
 }

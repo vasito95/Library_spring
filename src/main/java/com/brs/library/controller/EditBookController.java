@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 
@@ -47,7 +48,7 @@ public class EditBookController {
                 .id(id)
                 .name(name)
                 .attribute(attribute)
-                .authors(authors)
+                .authors(authors.stream().filter(s -> !s.equals("")).collect(Collectors.toList()))
                 .build();
         this.bookService.editBook(editedBook);
         return "redirect:/admin/edit-books";

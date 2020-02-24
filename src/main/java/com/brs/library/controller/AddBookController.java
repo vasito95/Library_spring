@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 
@@ -36,11 +37,12 @@ public class AddBookController {
     public String addNewBook(@RequestParam("name") String name,
                              @RequestParam("author") List<String> authors,
                              @RequestParam("attribute") String attribute) {
+
         Book newBook = Book.builder()
                 .isInUse(false)
                 .name(name)
                 .attribute(attribute)
-                .authors(authors)
+                .authors(authors.stream().filter(s -> !s.equals("")).collect(Collectors.toList()))
                 .build();
         this.bookService.saveNewBook(newBook);
         return "addbook";

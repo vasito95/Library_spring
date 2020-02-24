@@ -7,9 +7,6 @@
     <link th:href="@{/css/theme.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/vendor.css}" type="text/css" rel="stylesheet"/>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
 <div class="main-wrapper">
@@ -53,9 +50,9 @@
             <form method="get" action="/all-books">
                 <input class="form-control-sm" type="text" name="filter" th:placeholder="#{system.button.filter}">
                 <select class="form-control-sm" name="field">
-                    <option selected value="name">Name</option>
-                    <option value="author">Author</option>
-                    <option value="attribute">Attriubute</option>
+                    <option selected value="name" th:text="#{system.book.name}"></option>
+                    <option value="author" th:text="#{system.book.author}"></option>
+                    <option value="attribute" th:text="#{system.book.attribute}"></option>
                 </select>
                 <button class="button" type="submit" th:text="#{system.button.filter}"></button>
             </form>
@@ -65,10 +62,10 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Authors</th>
-                    <th scope="col">Attributes</th>
-                    <th scope="col">Is free</th>
+                    <th scope="col" th:text="#{system.book.name}"></th>
+                    <th scope="col" th:text="#{system.book.authors}"></th>
+                    <th scope="col" th:text="#{system.book.attribute}"></th>
+                    <th scope="col" th:text="#{system.book.isinuse}"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -84,6 +81,5 @@
         </article>
     </div>
 </div>
-
 </body>
 </html>
