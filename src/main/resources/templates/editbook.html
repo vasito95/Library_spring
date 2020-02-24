@@ -7,9 +7,6 @@
     <link th:href="@{/css/theme.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/vendor.css}" type="text/css" rel="stylesheet"/>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
 
@@ -58,16 +55,19 @@
         <article class="content dashboard-page">
             <form action="edit-book/accept-edit" method="post">
                 <input type="hidden" name="id" th:value="${book.id}">
-                <input class="form-control" type="text" name="name" placeholder="Input book name" th:value="${book.name}">
-                <h3>Authors</h3>
+                <h3 th:text="#{system.book.name}"></h3>
+                <input class="form-control" type="text" name="name" th:value="${book.name}">
+                <h3 th:text="#{system.book.authors}"></h3>
                 <input class="form-control" type="text" name="author" th:each="author : ${book.authors}" th:value="${author}">
-                <h3>Attributes</h3>
+                <h3 th:text="#{system.book.attribute}"></h3>
                 <input class="form-control" type="text" name="attribute" th:value="${book.attribute}">
-                <input type="submit" value="Confirm Edit"/>
+                <input type="submit" th:value="#{system.button.accept}"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </article>
     </div>
 </div>
+<script th:src="@{/js/jquerystatic.js}"></script>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>

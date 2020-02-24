@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Slf4j
 
@@ -20,14 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
-
     public SecurityConfig(UserService userService) {
         this.userService = userService;
-    }
-
-    @Bean
-    public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder(8);
     }
 
     @Override
@@ -43,15 +38,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                     .logout()
-                    .permitAll()
-        ;
+                    .permitAll();
     }
-
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //TODO remove deprecated
             auth.userDetailsService(userService)
-                    .passwordEncoder(NoOpPasswordEncoder.getInstance());
+                    .passwordEncoder(getPasswordEncoder());
+
+    }
+
+    @Bean
+    public BCryptPasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder(8);
     }
 }

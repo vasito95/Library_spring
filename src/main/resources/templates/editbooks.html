@@ -8,8 +8,6 @@
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/vendor.css}" type="text/css" rel="stylesheet"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
 
@@ -60,9 +58,9 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Authors</th>
-                    <th scope="col">Attributes</th>
+                    <th scope="col" th:text="#{system.book.name}"></th>
+                    <th scope="col" th:text="#{system.book.authors}"></th>
+                    <th scope="col" th:text="#{system.book.attribute}"></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -76,12 +74,12 @@
                         <form action="/edit-book"  method="post">
                             <input type="hidden" th:value="${book.id}" name="bookId">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                            <input type="submit" class="btn btn-outline-success m-1 " value="Edit">
+                            <input type="submit" class="btn btn-outline-success m-1 " th:value="#{system.button.edit}">
                         </form>
                         <form action="/edit-book/delete" method="post">
                             <input type="hidden" th:value="${book.id}" name="bookId">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                            <input type="submit" class="btn btn-outline-danger m-1" value="Delete">
+                            <input type="submit" class="btn btn-outline-danger m-1" th:value="#{system.button.delete}">
                         </form>
                     </td>
                 </tr>

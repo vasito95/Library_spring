@@ -8,8 +8,6 @@
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/vendor.css}" type="text/css" rel="stylesheet"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
 
@@ -59,9 +57,9 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">Date to</th>
+                    <th scope="col" th:text="#{system.book.name}"></th>
+                    <th scope="col" th:text="#{input.username}"></th>
+                    <th scope="col" th:text="#{system.date}"></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -75,18 +73,17 @@
                         <form action="/admin/orders/accept-order" method="post">
                             <input type="hidden" th:value="${order.id}" name="orderId">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                            <input type="submit" class="btn btn-outline-success m-1 " value="Accept">
+                            <input type="submit" class="btn btn-outline-success m-1 " th:value="#{system.button.accept}">
                         </form>
                         <form action="/admin/orders/decline-order" method="post">
                             <input type="hidden" th:value="${order.id}" name="orderId">
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                            <input type="submit" class="btn btn-outline-danger m-1" value="Decline">
+                            <input type="submit" class="btn btn-outline-danger m-1" th:value="#{system.button.decline}">
                         </form>
                     </td>
                 </tr>
                 </tbody>
             </table>
-
         </article>
     </div>
 </div>

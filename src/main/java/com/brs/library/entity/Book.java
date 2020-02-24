@@ -1,10 +1,6 @@
 package com.brs.library.entity;
 
-
 import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;

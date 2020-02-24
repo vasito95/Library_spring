@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Library</title>
@@ -35,11 +34,6 @@
                       th:if="${message} != null"
                       th:text="#{__${message}__}">
                 </span>
-                <div class="container">
-                    <div class="row text-center">
-                        <span class="text-danger" th:if="${message} != null" th:text="${message}"></span>
-                    </div>
-                </div>
                 <form action="#" th:action="@{/registration}" method="post" th:object="${user}">
                     <div>
                         <label for="username" th:text="#{input.username}"></label>
@@ -68,7 +62,6 @@
 
                         </span>
                     </div>
-
                     <div>
                         <label for="phone" th:text="#{input.phone.number}"></label>
                         <input th:field="*{phoneNumber}"

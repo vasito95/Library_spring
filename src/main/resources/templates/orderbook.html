@@ -8,8 +8,6 @@
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/vendor.css}" type="text/css" rel="stylesheet"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
 
@@ -48,26 +46,21 @@
                 </nav>
             </div>
         </aside>
-
         <article class="content dashboard-page">
             <div class="col text-center text-danger">
                 <span class="text-danger" th:if="${message} != null" th:text="${message}"></span>
             </div>
-
             <div class="center-block">
                 <form action="/order-book" method="POST">
-                    <input class="form-control-sm" type="text" name="name" placeholder="Input Name"/>
-                    <label for="dateTo">Date from today to:</label>
+                    <input class="form-control-sm" type="text" name="name" th:placeholder="#{input.book.name}"/>
+                    <label for="dateTo" th:text="#{system.date.from}"></label>
                     <input id="dateTo" type="date" th:min="${minDate}" th:max="${maxDate}" name="dateTo">
-                    <input type="submit" class="btn btn-success" value="Place Order">
+                    <input type="submit" class="btn btn-success" th:value="#{system.place.order}">
                     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                 </form>
             </div>
-
         </article>
     </div>
 </div>
-
-
 </body>
 </html>

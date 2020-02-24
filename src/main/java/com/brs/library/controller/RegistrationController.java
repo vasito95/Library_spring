@@ -1,5 +1,7 @@
 package com.brs.library.controller;
 
+import com.brs.library.dto.UserDTO;
+import com.brs.library.dto.mapper.UserMapper;
 import com.brs.library.entity.Role;
 import com.brs.library.entity.User;
 import com.brs.library.exceptions.EmailIsNotUniqueException;
@@ -27,20 +29,21 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String registration( Model model){
-        model.addAttribute("user",new User());
+        model.addAttribute("user", new UserDTO());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(@Valid @ModelAttribute(value = "user") User user, BindingResult errors, Model model){
-
+    public String addUser(@Valid @ModelAttribute(value = "user") UserDTO user, BindingResult errors, Model model){
+        log.error(user.toString());
         if(errors.hasErrors()){
             return "registration";
         }
-        user.setRoles(Collections.singleton(Role.ADMIN));
-        user.setIsActive(true);
+        User userEntity = UserMapper.mapToUser(user);
+        userEntity.setRoles(Collections.singleton(Role.USER));
+        userEntity.setIsActive(true);
         try{
-            userService.saveNewUser(user);
+            userService.saveNewUser(userEntity);
         } catch (EmailIsNotUniqueException e) {
             model.addAttribute("message", "registration.email.not.unique");
             return "registration";

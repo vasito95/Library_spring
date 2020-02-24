@@ -11,7 +11,21 @@
             <li class="profile">
                 <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
             </li>
-            <li id="dropdown" class="profile dropdown">
+            <li class="profile">
+                            <a class="dropdown-item"
+                                                    href="/admin"
+                                                   th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
+                                                   th:inline="text"
+                                                > [[#{system.menu.admin}]]</a>
+            </li>
+            <li class="profile">
+                                        <form action="/logout" method="post">
+                                                                <button class="dropdown-item" id="button" type="submit" th:inline="text">[[#{system.button.logout}]]
+                                                                </button>
+                                                                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                                                            </form>
+                        </li>
+            <!--<li id="dropdown" class="profile dropdown">
                 <a class="nav-link dropdown-toggle" role="button">
                     <i class="fa fa-cog icon"></i>
                 </a>
@@ -29,7 +43,7 @@
                         <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                     </form>
                 </div>
-            </li>
+            </li>-->
         </ul>
     </div>
 </header>

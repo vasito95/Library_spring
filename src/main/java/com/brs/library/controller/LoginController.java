@@ -1,5 +1,6 @@
 package com.brs.library.controller;
 
+import com.brs.library.dto.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ public class LoginController {
         if (error != null) {
             model.addAttribute("message", "User do not Exist!");
         }
+        model.addAttribute("user", new UserDTO());
         return "login";
     }
 }

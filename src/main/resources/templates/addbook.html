@@ -7,48 +7,13 @@
     <link th:href="@{/css/theme.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/vendor.css}" type="text/css" rel="stylesheet"/>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
 
 <div class="main-wrapper">
     <div class="app">
-        <header class="header">
-            <div class="header-block header-block-search">
 
-            </div>
-            <div class="header-block header-block-nav">
-                <ul class="nav-profile">
-                    <li class="profile">
-                        <a class="border p-1" href="?lang=ua" th:text="#{lang.ua}"></a>
-                    </li>
-                    <li class="profile">
-                        <a class="border p-1" href="?lang=en" th:text="#{lang.eng}"></a>
-                    </li>
-                    <li id="dropdown" class="profile dropdown">
-                        <a class="nav-link dropdown-toggle" role="button">
-                            <i class="fa fa-cog icon"></i>
-                        </a>
-                        <div class="dropdown-menu profile-dropdown-menu">
-                            <a class="dropdown-item"
-                               href="/admin"
-                               th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
-                               th:inline="text"
-                            > <i class="fa fa-gear icon"></i>[[#{system.menu.admin}]]</a>
-                            <div class="dropdown-divider"></div>
-                            <form action="/logout" method="post">
-                                <button class="dropdown-item" id="button" type="submit" th:inline="text"><i
-                                        class="fa fa-sign-out icon"></i>[[#{system.button.logout}]]
-                                </button>
-                                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header>
+        <div th:include="fragments/header.html"></div>
 
         <aside class="sidebar">
             <div class="sidebar-container">
@@ -90,23 +55,25 @@
 
         <article class="content dashboard-page">
             <form action="/admin/add-book" method="post">
-                <input class="form-control" type="text" name="name" placeholder="Input book name">
-                <h3>Authors</h3>
-                <input class="form-control" type="text" name="author" placeholder="Input author">
-                <input class="form-control" type="text" name="author" placeholder="Input author">
-                <input class="form-control" type="text" name="author" placeholder="Input author">
-                <h3>Attributes</h3>
-                <input class="form-control" type="text" name="attribute" placeholder="Input attribute">
-                <input type="submit" value="Add"/>
+                <h3 th:text="#{system.book.name}"></h3>
+                <input class="form-control" type="text" name="name" th:placeholder="#{input.book.name}">
+                <h3 th:text="#{system.book.author}"></h3>
+                <span class="author-input"><i class="fa fa-plus"></i></span>
+                <div class="author-box">
+                    <input class="form-control" id="author" type="text" name="author" th:placeholder="#{input.author}">
+                </div>
+                <h3 th:text="#{system.book.attribute}"></h3>
+                <input class="form-control" type="text" name="attribute" th:placeholder="#{input.attribute}">
+                <input type="submit" th:value="#{system.button.add}"/>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Authors</th>
-                    <th scope="col">Attributes</th>
+                    <th scope="col" th:text="#{system.book.name}"></th>
+                    <th scope="col" th:text="#{system.book.author}"></th>
+                    <th scope="col" th:text="#{system.book.attribute}"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -121,5 +88,7 @@
         </article>
     </div>
 </div>
+<script th:src="@{/js/jquerystatic.js}"></script>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>
